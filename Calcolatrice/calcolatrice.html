@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Document</title>
+        <link rel="stylesheet" href="./style/style.css" type="text/css">
+    </head>
+    <script src="./script/script.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        const calc = new Calcolatrice();
+    </script>
+    <body>
+        <div align="center">
+            <table>
+                <tr>
+                    <td colspan="5">
+                        <input type="text" name="schermo" id="text" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" value="7" onclick="calc.aggiungiValore('7')">
+                    </td>
+                    <td>
+                        <input type="button" value="8" onclick="calc.aggiungiValore('8')">
+                    </td>
+                    <td>
+                        <input type="button" value="9" onclick="calc.aggiungiValore('9')">
+                    </td>
+                    <td>
+                        <input type="button" value="DEL" onclick="">
+                    </td>
+                    <td>
+                        <input type="button" value="AC" onclick="calc.clear()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" value="4" onclick="calc.aggiungiValore('4')">
+                    </td>
+                    <td>
+                        <input type="button" value="5" onclick="calc.aggiungiValore('5')">
+                    </td>
+                    <td>
+                        <input type="button" value="6" onclick="calc.aggiungiValore('6')">
+                    </td>
+                    <td>
+                        <input type="button" value="x" onclick="calc.segnoCliccato('x')">
+                    </td>
+                    <td>
+                        <input type="button" value="÷" onclick="calc.segnoCliccato('÷')">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" value="1" onclick="calc.aggiungiValore('1')">
+                    </td>
+                    <td>
+                        <input type="button" value="2" onclick="calc.aggiungiValore('2')">
+                    </td>
+                    <td>
+                        <input type="button" value="3" onclick="calc.aggiungiValore('3')">
+                    </td>
+                    <td>
+                        <input type="button" value="+" onclick="calc.segnoCliccato('+')">
+                    </td>
+                    <td>
+                        <input type="button" value="-" onclick="calc.segnoCliccato('-')">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" value="0" onclick="calc.aggiungiValore('0')">
+                    </td>
+                    <td>
+                        <input type="button" value="." onclick="calc.pulsante('.')">
+                    </td>
+                    <td>
+                        <input type="button" value="x10ª" onclick="">
+                    </td>
+                    <td>
+                        <input type="button" value="Ans" onclick="">
+                    </td>
+                    <td>
+                        <input type="button" value="=" onclick="calc.calcola()">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
