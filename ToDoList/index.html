@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>To Do List</title>
+
+    <link rel="stylesheet" href="./style.css" type="text/css">
+</head>
+
+<body>
+
+    <div align="center" class="page">
+        
+        <div class="title">
+
+            <h1>
+                ToDoList
+            </h1>
+        </div>
+
+        <div class="header" align="center">
+
+            <div align="center">
+                <p>Data:</p>
+                <input type="date" id="data">
+            </div>
+
+            <div align="center">
+                <p>Dettagli Impegno:</p>
+                <input type="text" placeholder="Aggiungi un impegno" id="impegno">
+            </div>
+        </div>
+        
+        <input id="aggiungi" type="button" value="AGGIUNGI" onclick="l1.add()">
+
+        <div class="body" align="center">
+
+            <table id="impegni" align="center">
+
+            </table>
+        </div>
+    </div>
+
+    <script src="./script.js" type="text/javascript"></script>
+
+</body>
+</html>
