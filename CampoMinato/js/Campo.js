@@ -65,7 +65,12 @@ class Campo {
         let row = parseInt(cell.attr("data-row"));
         let col = parseInt(cell.attr("data-col"));
         let c1 = this.getCella(row, col);
-        if (c1.flag || c1.clicked) return;
+        if (c1.clicked) {
+            if (c1.count != 0 && c1.count == this.controllaBandierine(row, col)) {
+                this.liberaCelle(row, col);
+            }
+        }
+        if (c1.flag) return;
         if (c1.bomb) {
             this.showBombs();
             this.gameover = true;
@@ -77,12 +82,49 @@ class Campo {
             if (c1.count == 0) {
                 this.clickEmptyCells(row, col);
             } else {
-                cell.text(c1.count);
                 cell.addClass("count-" + c1.count);
             }
             if (this.checkWin()) {
                 $('#end').show();
                 $('#end').text("Hai Vinto!");
+            }
+        }
+    }
+
+    controllaBandierine(r, c) {
+        let count = 0;
+        let cell = this.getCella(r, c);
+        for (let j = -1; j <= 1; j++) {
+            for (let k = -1; k <= 1; k++) {
+                let row = cell.row + j;
+                let col = cell.col + k;
+                if (row < 0 || row >= this.size || col < 0 || col >= this.size) continue;
+                let adjacent = this.getCella(row, col);
+                if (!adjacent.clicked && adjacent.flag) count++;
+            }
+        }
+        return count;
+    }
+
+    liberaCelle(r, c) {
+        let cell = this.getCella(r, c);
+        for (let j = -1; j <= 1; j++) {
+            for (let k = -1; k <= 1; k++) {
+                let row = cell.row + j;
+                let col = cell.col + k;
+                if (row < 0 || row >= this.size || col < 0 || col >= this.size) continue;
+                let adjacent = this.getCella(row, col);
+                if (!adjacent.flag && adjacent.bomb) {
+                    this.showBombs();
+                    this.gameover = true;
+                    $('#end').show();
+                    $('#end').text("Hai Perso!");
+                }
+                if (!adjacent.flag) {
+                    let elem = this.getCellElement(row, col);
+                    elem.addClass("clicked");
+                    elem.addClass("count-" + adjacent.count);
+                }
             }
         }
     }
@@ -115,7 +157,7 @@ class Campo {
                 if (cellAdiac.count == 0) {
                     this.clickEmptyCells(rAdiac, cAdiac);
                 } else {
-                    elementoCellaAdiac.text(cellAdiac.count);
+                    // elementoCellaAdiac.text(cellAdiac.count);
                     elementoCellaAdiac.addClass("count-" + cellAdiac.count);
                 }
             }
@@ -164,5 +206,7 @@ class Campo {
         }
         return null;
     }
+
+
 
 }
