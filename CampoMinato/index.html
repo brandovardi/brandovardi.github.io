@@ -7,15 +7,27 @@
 </head>
 
 <body>
-    <div align="center">
-        <button id="restart">
-            RESTART
-        </button>
+    <div class="body">
+        <div align="center" class="header">
+            <div>
+                <select name="" id="select">
+                    <option selected value="10">Principiante</option>
+                    <option value="15">Intermedio</option>
+                    <option value="20">Avanzato</option>
+                </select>
+            </div>
+            <button id="restart">
+                RESTART
+            </button>
+            <div id="numeroMine">
+                Mine Restanti: 10
+            </div>
+        </div>
+        <br>
+        <div id="campo_minato" align="center"></div>
+    
+        <div id="end" align="center"></div>
     </div>
-    <br>
-    <div id="campo_minato" align="center"></div>
-
-    <div id="end" align="center"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/Cella.js" type="text/javascript"></script>
