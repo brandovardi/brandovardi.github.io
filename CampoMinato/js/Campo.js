@@ -1,7 +1,6 @@
 class Campo {
 
     constructor(dim, bombe) {
-        this.first = false;
         this.size = dim;
         this.gameover = false;
         this.bombe = bombe;
