@@ -1,0 +1,48 @@
+.cell {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    
+    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAHt7e729vf///wAAACwAAAAAEAAQAAACKpSPGckXYIKcVAIoqn541xt5E5iJVmdyoUmmasmi8Sq2Kchd+q7n/A8oAAA7");
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    vertical-align: middle;
+    border-radius: 10%;
+}
+
+.cell.clicked {
+    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPAAAHt7e729vSwAAAAAEAAQAAACHYSPacHtD550cc5qYZZ4s+6Bm5iRlnl5lNqgHMsUADs=");
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-weight: bold;
+    
+}
+
+.cell.bomb {
+    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAAAHt7e/8AAP///ywAAAAAEAAQAAACNIyPacLtHx4DUkRJ5RUUeM81G/d9zuYNQ5lZTbqWIsnW7lSDDJq3Y3560UC+SiuIqYwqjgIAOw==");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.cell.flag {
+    background-image: url("data:image/gif;base64,R0lGODdhEAAPAPIAAAAAAHt7e729vf8AAP///wAAAAAAAAAAACwAAAAAEAAPAAADOUi63NJwiaCEvdgGSvIY2VZZ3xdyZAliYpeaLIrBV5sJwDliebzjgKDPFSwWNTKjEfm7MSebqFSaAAA7");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.cell.zero {
+    background-color: lightgray;
+}
+
+#end {
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 100px;
+    color: brown;
+}
