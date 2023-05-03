@@ -1,6 +1,7 @@
 class Campo {
 
     constructor(dim, bombe) {
+        this.first = false;
         this.size = dim;
         this.gameover = false;
         this.bombe = bombe;
@@ -122,8 +123,14 @@ class Campo {
                 }
                 if (!adjacent.flag) {
                     let elem = this.getCellElement(row, col);
+                    let c1 = this.getCella(row, col);
+                    c1.clicked = true;
                     elem.addClass("clicked");
-                    elem.addClass("count-" + adjacent.count);
+                    if (c1.count == 0) {
+                        this.clickEmptyCells(row, col);
+                    } else {
+                        elem.addClass("count-" + c1.count);
+                    }
                 }
             }
         }
