@@ -12,7 +12,7 @@ $(document).ready(function () {
             campo = new Campo(20, 50);
         }
         else if (x == "3") {
-            campo = new Campo(30, 110);
+            campo = new Campo(30, 120);
         }
         else if (x == "4") {
             campo = new Campo(25, 150);
