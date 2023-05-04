@@ -1,18 +1,15 @@
 .cell {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
     border: 1px solid black;
     
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAHt7e729vf///wAAACwAAAAAEAAQAAACKpSPGckXYIKcVAIoqn541xt5E5iJVmdyoUmmasmi8Sq2Kchd+q7n/A8oAAA7");
     background-size: contain;
     background-repeat: no-repeat;
 
-    text-align: center;
-    font-size: 14px;
     cursor: pointer;
     vertical-align: middle;
-    border-radius: 10%;
 }
 
 .cell.clicked {
