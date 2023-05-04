@@ -71,7 +71,7 @@ $(document).ready(function () {
         // resetto l'opzione su "Principiante"
         $('#select').val('1');
         // e ricreo il campo
-        campo = new Campo(8, 8, 10);
+        let campo = new Campo(8, 8, 10);
         campo.clear();
         campo.generaCampo();
     });
