@@ -6,7 +6,7 @@ $(document).ready(function () {
         x = x[0].value;
         let campo;
         if (x == "1") {
-            campo = new Campo(10, 10);
+            campo = new Campo(10, 15);
         }
         else if (x == "2") {
             campo = new Campo(20, 50);
