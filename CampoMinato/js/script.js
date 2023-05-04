@@ -22,6 +22,7 @@ $(document).ready(function () {
         campo.generaCampo();
         
         $('#first').hide();
+        $('#end').hide();
     });
 
 
