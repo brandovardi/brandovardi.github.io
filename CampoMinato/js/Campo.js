@@ -112,7 +112,7 @@ class Campo {
             for (let k = -1; k <= 1; k++) {
                 let row = cell.row + j;
                 let col = cell.col + k;
-                if (row < 0 || row >= this.height || col < 0 || col >= this.height) continue;
+                if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue;
                 let adjacent = this.getCella(row, col);
                 if (!adjacent.clicked && adjacent.flag) count++;
             }
@@ -126,7 +126,7 @@ class Campo {
             for (let k = -1; k <= 1; k++) {
                 let row = cell.row + j;
                 let col = cell.col + k;
-                if (row < 0 || row >= this.height || col < 0 || col >= this.height) continue;
+                if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue;
                 let adjacent = this.getCella(row, col);
                 if (!adjacent.flag && adjacent.bomb) {
                     this.showBombs();
@@ -168,7 +168,7 @@ class Campo {
             for (let k = -1; k <= 1; k++) {
                 let rAdiac = row + j;
                 let cAdiac = col + k;
-                if (rAdiac < 0 || rAdiac >= this.height || cAdiac < 0 || cAdiac >= this.height) continue;
+                if (rAdiac < 0 || rAdiac >= this.height || cAdiac < 0 || cAdiac >= this.width) continue;
                 let cellAdiac = this.getCella(rAdiac, cAdiac);
                 if (cellAdiac.bomb || cellAdiac.clicked || cellAdiac.flag) continue;
                 cellAdiac.clicked = true;
@@ -194,7 +194,7 @@ class Campo {
                 for (let k = -1; k <= 1; k++) {
                     let row = cell.row + j;
                     let col = cell.col + k;
-                    if (row < 0 || row >= this.height || col < 0 || col >= this.height) continue;
+                    if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue;
                     let adjacent = this.getCella(row, col);
                     if (adjacent.bomb) count++;
                 }
