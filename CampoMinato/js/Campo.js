@@ -1,7 +1,8 @@
 class Campo {
 
-    constructor(dim, bombe) {
-        this.size = dim;
+    constructor(alt, larg, bombe) {
+        this.height = alt;
+        this.width = larg;
         this.gameover = false;
         this.bombe = bombe;
         this.win = false;
@@ -17,9 +18,9 @@ class Campo {
         // crea la griglia di gioco
         let campo_minato = $("#campo_minato");
         $('#numeroMine').text("Mine Restanti: " + this.bombe);
-        for (let i = 0; i < this.size; i++) {
+        for (let i = 0; i < this.height; i++) {
             let row = $("<div>");
-            for (let j = 0; j < this.size; j++) {
+            for (let j = 0; j < this.width; j++) {
                 let cella = $("<div>");
                 cella.addClass("cell");
                 cella.attr("data-row", i);
@@ -36,6 +37,7 @@ class Campo {
     }
 
     flagHandler(event) {
+        if (this.gameover || this.win) return;
         event.preventDefault();
         let cell = $(event.target);
         let row = parseInt(cell.attr("data-row"));
@@ -96,6 +98,7 @@ class Campo {
                 cell.addClass("count-" + c1.count);
             }
             if (this.checkWin()) {
+                this.win = true;
                 $('#end').show();
                 $('#end').text("Hai Vinto!");
             }
@@ -109,7 +112,7 @@ class Campo {
             for (let k = -1; k <= 1; k++) {
                 let row = cell.row + j;
                 let col = cell.col + k;
-                if (row < 0 || row >= this.size || col < 0 || col >= this.size) continue;
+                if (row < 0 || row >= this.height || col < 0 || col >= this.height) continue;
                 let adjacent = this.getCella(row, col);
                 if (!adjacent.clicked && adjacent.flag) count++;
             }
@@ -123,7 +126,7 @@ class Campo {
             for (let k = -1; k <= 1; k++) {
                 let row = cell.row + j;
                 let col = cell.col + k;
-                if (row < 0 || row >= this.size || col < 0 || col >= this.size) continue;
+                if (row < 0 || row >= this.height || col < 0 || col >= this.height) continue;
                 let adjacent = this.getCella(row, col);
                 if (!adjacent.flag && adjacent.bomb) {
                     this.showBombs();
@@ -165,7 +168,7 @@ class Campo {
             for (let k = -1; k <= 1; k++) {
                 let rAdiac = row + j;
                 let cAdiac = col + k;
-                if (rAdiac < 0 || rAdiac >= this.size || cAdiac < 0 || cAdiac >= this.size) continue;
+                if (rAdiac < 0 || rAdiac >= this.height || cAdiac < 0 || cAdiac >= this.height) continue;
                 let cellAdiac = this.getCella(rAdiac, cAdiac);
                 if (cellAdiac.bomb || cellAdiac.clicked || cellAdiac.flag) continue;
                 cellAdiac.clicked = true;
@@ -191,7 +194,7 @@ class Campo {
                 for (let k = -1; k <= 1; k++) {
                     let row = cell.row + j;
                     let col = cell.col + k;
-                    if (row < 0 || row >= this.size || col < 0 || col >= this.size) continue;
+                    if (row < 0 || row >= this.height || col < 0 || col >= this.height) continue;
                     let adjacent = this.getCella(row, col);
                     if (adjacent.bomb) count++;
                 }
