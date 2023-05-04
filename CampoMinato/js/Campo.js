@@ -6,11 +6,17 @@ class Campo {
         this.bombe = bombe;
         this.win = false;
         this.board = [];
+        this.flags = 0;
+    }
+
+    clear() {
+        $("#campo_minato").html("");
     }
 
     generaCampo() {
         // crea la griglia di gioco
         let campo_minato = $("#campo_minato");
+        $('#numeroMine').text("Mine Restanti: " + this.bombe);
         for (let i = 0; i < this.size; i++) {
             let row = $("<div>");
             for (let j = 0; j < this.size; j++) {
@@ -36,9 +42,12 @@ class Campo {
         let col = parseInt(cell.attr("data-col"));
         let c1 = this.getCella(row, col);
         if (c1.clicked) return;
-        if (!c1.flag) {
+        if (!c1.flag && this.flags < this.bombe) {
             c1.flag = true;
             cell.addClass("flag");
+            this.flags++;
+            let x = this.bombe - this.flags;
+            $('#numeroMine').text("Mine Restanti: " + x);
         } else {
             c1.flag = false;
             cell.removeClass("flag");
