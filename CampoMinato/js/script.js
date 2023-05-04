@@ -9,7 +9,7 @@ $(document).ready(function () {
             campo = new Campo(10, 10);
         }
         else if (x == "2") {
-            campo = new Campo(20, 55);
+            campo = new Campo(20, 50);
         }
         else if (x == "3") {
             campo = new Campo(30, 110);
