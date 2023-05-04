@@ -11,11 +11,13 @@
         <div align="center" class="header">
             <div class="content">
                 <select name="" id="select">
-                    <option selected id="first"></option>
-                    <option value="1">Principiante</option>
+                    <!--
+                        <option id="first"></option>
+                    -->
+                    <option selected value="1">Principiante</option>
                     <option value="2">Intermedio</option>
                     <option value="3">Avanzato</option>
-                    <option value="4">Esperto</option>
+                    <option value="P" id="person">Personalizzato</option>
                 </select>
             </div>
             <div class="content">
@@ -29,7 +31,30 @@
         </div>
         <br>
         <div id="campo_minato" align="center"></div>
-    
+        
+        <br>
+        <div id="personalizza" style="display: none;" align="center">
+            <h2>Impostazioni personalizzate</h2>
+            <table border="0">
+                    <tr>
+                        <td>Altezza del gioco:</td>
+                        <td><input type="number" id="Maxh" size="3" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Larghezza del gioco:</td>
+                        <td><input type="number" id="Maxw" size="3" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Numero di bombe:</td>
+                        <td><input type="number" id="numBomb" size="3" value=""></td>
+                    </tr>
+            </table>
+            <p>
+                <input type="button" id="OKButton" value="OK">
+                <input type="button" id="CancelButton" value="Annulla">
+            </p>
+        </div>
+
         <div id="end" align="center"></div>
     </div>
 
