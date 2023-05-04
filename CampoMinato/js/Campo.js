@@ -81,6 +81,8 @@ class Campo {
         }
         if (c1.flag) return;
         if (c1.bomb) {
+            c1.clicked = true;
+            cell.addClass("clicked");
             this.showBombs();
             this.gameover = true;
             $('#end').show();
