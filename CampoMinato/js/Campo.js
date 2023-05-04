@@ -37,8 +37,8 @@ class Campo {
     }
 
     flagHandler(event) {
-        if (this.gameover || this.win) return;
         event.preventDefault();
+        if (this.gameover || this.win) return;
         let cell = $(event.target);
         let row = parseInt(cell.attr("data-row"));
         let col = parseInt(cell.attr("data-col"));
@@ -50,9 +50,16 @@ class Campo {
             this.flags++;
             let x = this.bombe - this.flags;
             $('#numeroMine').text("Mine Restanti: " + x);
-        } else {
+        }
+        else if (!c1.flag && this.flags == this.bombe) {
+            return;
+        } 
+        else {
             c1.flag = false;
             cell.removeClass("flag");
+            this.flags--;
+            let x = this.bombe - this.flags;
+            $('#numeroMine').text("Mine Restanti: " + x);
         }
     }
 
