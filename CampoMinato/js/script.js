@@ -2,31 +2,42 @@ $(document).ready(function () {
 
     // if per quando si carica la pagina per la prima volta
     if ($('#select').val() == "1") {
+        $('#campo_minato').toggleClass($('#select').val(), true);
         let campo = new Campo(8, 8, 10);
         campo.clear();
         campo.generaCampo();
+    }
+    
+    function changeClass($1, $2, $3, $P) {
+        $('#campo_minato').toggleClass('1', $1);
+        $('#campo_minato').toggleClass('2', $2);
+        $('#campo_minato').toggleClass('3', $3);
+        $('#campo_minato').toggleClass('P', $P);
     }
 
     // quando cambio l'opzione della select
     $('#select').change(function () {
         // mi salvo il valore appena selezionato
-        let x = $(this).val();
+        let difficulty = $(this).val();
         // inizializzo un campo undefined
         let campo;
         // controllo i vari casi possibili e creo il campo in base alla scelta
-        if (x == "1") {
+        if (difficulty == "1") {
             campo = new Campo(8, 8, 10);
             $('#personalizza').css({display:'none'});
+            changeClass(true, false, false, false);
         }
-        else if (x == "2") {
+        else if (difficulty == "2") {
             campo = new Campo(16, 16, 40);
             $('#personalizza').css({display:'none'});
+            changeClass(false, true, false, false);
         }
-        else if (x == "3") {
+        else if (difficulty == "3") {
             campo = new Campo(16, 31, 99);
             $('#personalizza').css({display:'none'});
+            changeClass(false, false, true, false);
         }
-        else if (x == "P") {
+        else if (difficulty == "P") {
             // se l'utente vuole personalizzare il campo allora rendo visibile il div per personalizzare
             $('#personalizza').css({display:'block'});
             return;
@@ -59,6 +70,8 @@ $(document).ready(function () {
         let campo = new Campo(alt, larg, mine);
         // nascondo il campo div per personalizzare
         $('#personalizza').css({display:'none'});
+        // modifico la classe del campo
+        changeClass(false, false, false, true);
         // poi pulisco e rigenero il campo
         campo.clear();
         campo.generaCampo();
@@ -68,12 +81,25 @@ $(document).ready(function () {
     $('#CancelButton').click(function () {
         // allora nascondo il div per personalizzare
         $('#personalizza').css({display:'none'});
-        // resetto l'opzione su "Principiante"
-        $('#select').val('1');
-        // e ricreo il campo
-        let campo = new Campo(8, 8, 10);
-        campo.clear();
-        campo.generaCampo();
+        // mi salvo il campo minato perché mi servirà controllare la classe
+        let x = $('div#campo_minato');
+        // in base alla classe modifico il valore nella select
+        if (x.hasClass('1')) {
+            $('#select').val('1');
+            changeClass(true, false, false, false);
+        }
+        else if (x.hasClass('2')) {
+            $('#select').val('2');
+            changeClass(false, true, false, false);
+        }
+        else if (x.hasClass('3')) {
+            $('#select').val('3');
+            changeClass(false, false, true, false);
+        }
+        else if (x.hasClass('P')) {
+            $('#select').val('P');
+            changeClass(false, false, false, true);
+        }
     });
 
     // quando viene premuto il pulsante "restart"
