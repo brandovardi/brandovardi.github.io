@@ -216,8 +216,6 @@ class Campo {
 
     // metodo per scoprire le celle coperte senza bandierina attorno ad una cella con un contatore, cliccata
     liberaCelle(r, c) {
-        let flagTmp = [];
-        let cntFlagTmp = 0;
         // mi salvo la cella cliccata
         let cell = this.getCella(r, c);
         // ciclo per controllare le righe
@@ -233,15 +231,6 @@ class Campo {
                 let adjacent = this.getCella(row, col);
                 // prendo l'elemento "cell" in base alla riga e colonna
                 let elem = this.getCellElement(row, col);
-                // controllo se la cella attuale ha la bandierina ma non la bomba
-                if (adjacent.flag && !adjacent.bomb) {
-                    // se è così allora mi salvo la cella
-                    flagTmp[cntFlagTmp] = this.getCellElement(row, col);
-                    // e gli aggiungo una classe per poterla modificare dopo con il css (se necessario)
-                    flagTmp.addClass("covered");
-                    // aggiorno il contatore del vettore
-                    cntFlagTmp++;
-                }
                 // se la cella adiacente non ha la bandiera e ha la bomba allora ha perso
                 if (!adjacent.flag && adjacent.bomb) {
                     // indico che la cella è stata cliccata
@@ -273,13 +262,6 @@ class Campo {
                         elem.addClass("count-" + adjacent.count);
                     }
                 }
-            }
-        }
-        // controllo se il valore della cella flagTmp è cambiato durante il controllo
-        if (cntFlagTmp > 0) {
-            // se sì allora la classe aggiunta precedentemente non serve più
-            for (let i = 0; i < cntFlagTmp; i++) {
-                flagTmp.removeClass("covered");
             }
         }
     }
