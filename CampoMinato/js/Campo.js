@@ -238,6 +238,7 @@ class Campo {
                     // e faccio vedere una scritta sotto al campo
                     $('#end').show();
                     $('#end').text("Hai Perso!");
+                    // siccome ha perso esco dal ciclo e termino il controllo
                     return;
                 }
                 // se la cella adiacente non ha la bandierina allora la scopro
