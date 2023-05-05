@@ -3,18 +3,18 @@ class Campo {
     // costruttore
     constructor(alt, larg, bombe) {
         // attributi
-        this.height = alt;
-        this.width = larg;
-        this.gameover = false;
-        this.bombe = bombe;
-        this.win = false;
-        this.board = [];
-        this.flags = 0;
+        this.height = alt; // altezza del campo
+        this.width = larg; // larghezza del campo
+        this.gameover = false; // controllo per sapere se ha perso
+        this.bombe = bombe; // numero di bombe presenti nel campo
+        this.win = false; // controllo per sapere se ha vinto
+        this.board = []; // vettore che conterrà tutte le celle (div) del campo
+        this.flags = 0; // numero delle bandierine piazzate dall'utente
     }
 
     // metodo per pulire lo schermo togliendo il campo
     clear() {
-        $("#campo_minato").html("");
+        $("#campo_minato").html(""); // svuoto il div con id="campo_minato"
     }
 
     // metodo per generare il campo
@@ -92,7 +92,7 @@ class Campo {
         // se la cella cliccata non ha la bandierina e il numero delle bandierine inserite dall'utente ha raggiunto il numero delle bombe presenti nel campo
         // allora non faccio niente
         else if (!c1.flag && this.flags == this.bombe) {
-            return;
+            return; // esco dalla funzione
         }
         // se invece la cella ha già la bandierina la tolgo
         else {
@@ -116,7 +116,7 @@ class Campo {
             let cell = this.board[i];
             // se c'è una cella che allo stesso tempo non ha la bomba e non è stata cliccata allora non ha vinto
             if (!cell.bomb && !cell.clicked) {
-                return false;
+                return false; // ritorno false per sapere com'è andato il controllo
             }
         }
         // se esce dal ciclo significa che ha scoperto tutte le caselle senza bomba
@@ -127,7 +127,7 @@ class Campo {
     clickHandler(event) {
         // se l'utente ha già vinto o perso non faccio niente 
         if (this.gameover || this.win) {
-            return;
+            return; // esco dalla funzione
         }
         // evito che la pagina si ricarichi
         event.preventDefault();
@@ -151,7 +151,7 @@ class Campo {
             }
         }
         // se la cella cliccata ha una bandierina allora non faccio niente
-        if (c1.flag) return;
+        if (c1.flag) return; // esco dalla funzione
         // se la cella cliccata ha una bomba
         if (c1.bomb) {
             // allora modifico l'attributo clicked
@@ -203,7 +203,7 @@ class Campo {
                 let row = cell.row + j;
                 let col = cell.col + k;
                 // controllo che la riga e colonna non siano minori di zero e che non superino le dimensioni massime del campo
-                if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue;
+                if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
                 // mi salvo la cella adiacente
                 let adjacent = this.getCella(row, col);
                 // se la cella adiacente non è ancora stata cliccata e ha la flag aggiorno il contatore
@@ -226,7 +226,7 @@ class Campo {
                 let row = cell.row + j;
                 let col = cell.col + k;
                 // controllo che non sia una cella fuori dal campo, se esce dal campo allora passo al giro successivo
-                if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue;
+                if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
                 // misalvo la cella adiacente appena trovata
                 let adjacent = this.getCella(row, col);
                 // se la cella adiacente non ha la bandiera e ha la bomba allora ha perso
@@ -282,7 +282,7 @@ class Campo {
 
     // metodo che ritorna l'elemento cella utilizzando jquery
     getCellElement(row, col) {
-        // prendo l'elemento con gli attributi partendo dalla classe
+        // prendo l'elemento con gli attributi partendo dalla classe e lo imposto come ritorno della funzione
         return $(".cell[data-row=" + row + "][data-col=" + col + "]");
     }
 
@@ -296,12 +296,12 @@ class Campo {
                 let rAdiac = row + j;
                 let cAdiac = col + k;
                 // controllo che sia dentro al campo, se non è dentro al campo eseguo i controlli successivi
-                if (rAdiac < 0 || rAdiac >= this.height || cAdiac < 0 || cAdiac >= this.width) continue;
+                if (rAdiac < 0 || rAdiac >= this.height || cAdiac < 0 || cAdiac >= this.width) continue; // continuo il ciclo
                 // mi salvo la cella adiacente prendendola come oggetto
                 let cellAdiac = this.getCella(rAdiac, cAdiac);
                 // se la cella cliccata è una bomba o una cella già cliccata o una bandiera allora salto i controlli successivi
                 // e passo alla prossima cella
-                if (cellAdiac.bomb || cellAdiac.clicked || cellAdiac.flag) continue;
+                if (cellAdiac.bomb || cellAdiac.clicked || cellAdiac.flag) continue; // continuo il ciclo
                 // se arriva a sto punto significa che è una cella vuota
                 // allora indico che è stata cliccata
                 cellAdiac.clicked = true;
@@ -329,7 +329,7 @@ class Campo {
             // mi salvo la cella corrente
             let cell = this.board[i];
             // se la cella contiene una bomba non eseguo i controlli successivi
-            if (cell.bomb) continue;
+            if (cell.bomb) continue; // continuo il ciclo
             // inizializzo il contatore per le bombe a zero
             let count = 0;
             // ciclo per controllare le righe
@@ -340,7 +340,7 @@ class Campo {
                     let row = cell.row + j;
                     let col = cell.col + k;
                     // controllo che sia una cella all'interno del campo
-                    if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue;
+                    if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
                     // prendo l'oggetto della cella adiacente
                     let adjacent = this.getCella(row, col);
                     // e se la cella adiacente è una bomba incremento il contatore per le bombe
@@ -380,7 +380,7 @@ class Campo {
         for (let i = 0; i < this.board.length; i++) {
             // mi salvo la cella corrente
             let cell = this.board[i];
-            // se la riga e la colonna della cella corrente sono uguali a quelli passati per parametro tirorno la cella
+            // se la riga e la colonna della cella corrente sono uguali a quelli passati per parametro ritorno la cella
             if (cell.row == r && cell.col == c) return cell;
         }
         // se esce dal ciclo non ha trovato la cella e ritorno null
