@@ -121,7 +121,7 @@ $(document).ready(function () {
             }
             // alla fine nascondo il div per personalizzare
             $('#personalizza').css({display:'none'});
-            $('#select').val('1');
+            $('#select').val('P');
         }
         // poi pulisco e rigenero il campo
         campo.clear();
