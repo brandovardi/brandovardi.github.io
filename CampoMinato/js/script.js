@@ -127,7 +127,7 @@ $(document).ready(function () {
             let larg = $('#Maxw').val();
             let mine = $('#numBomb').val();
             // controllo che i valori esistano
-            if (alt != "" && larg != "" && mine != "") {
+            if (alt != '' && larg != '' && mine != '') {
                 // e controllo che siano stati inseriti correttamente
                 if ((alt < 8 || alt > 24) || (larg < 8 || larg > 32) || (mine < 1 || mine > ((alt * larg) / 3))) {
                     alert("Le dimensioni del tuo Campo non sono valide:"
@@ -139,15 +139,32 @@ $(document).ready(function () {
                 else {
                     // se sono stati inseriti correttamente allora creo i campi con i dati precedenti
                     campo = new Campo(alt, larg, mine);
+                    $('#select').val('P');
+                    changeClass(false, false, false, true);
                 }
             }
-            else{
-                // altrimenti creo un campo di default "Principiante"
-                campo = new Campo(8, 8, 10);
+            else {
+                // mi salvo il campo minato perché mi servirà controllare la classe
+                let x = $('div#campo_minato');
+                // in base alla classe modifico il valore nella select
+                if (x.hasClass('1')) {
+                    campo = new Campo(8, 8, 10);
+                    $('#select').val('1');
+                    changeClass(true, false, false, false);
+                }
+                else if (x.hasClass('2')) {
+                    campo = new Campo(16, 16, 40);
+                    $('#select').val('2');
+                    changeClass(false, true, false, false);
+                }
+                else if (x.hasClass('3')) {
+                    campo = new Campo(16, 31, 99);
+                    $('#select').val('3');
+                    changeClass(false, false, true, false);
+                }
             }
             // alla fine nascondo il div per personalizzare
             $('#personalizza').css({display:'none'});
-            $('#select').val('P');
         }
         // poi pulisco e rigenero il campo
         campo.clear();
