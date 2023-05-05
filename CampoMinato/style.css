@@ -121,3 +121,9 @@ button:hover {
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+.cell.flag.bomb {
+    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAAAHt7e729vf///ywAAAAAEAAQAAACNIyPacLtHx4DUkRJ5RUUeM81G/d9zuYNQ5lZTbqWIsnW7lSDDJq3Y3560UC+SiuIqYwqjgIAOw==");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
