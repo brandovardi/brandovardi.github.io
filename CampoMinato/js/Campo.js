@@ -288,19 +288,33 @@ class Campo {
 
     // metodo che libera le celle attorno ad una cella vuota
     clickEmptyCells(row, col) {
+        // ciclo che controlla le righe attorno alla cella
         for (let j = -1; j <= 1; j++) {
+            // ciclo che controlla ogni cella per ciascuna riga attorno alla cella
             for (let k = -1; k <= 1; k++) {
+                // mi calcolo i valori della riga e colonna di una cella adiacente
                 let rAdiac = row + j;
                 let cAdiac = col + k;
+                // controllo che sia dentro al campo, se non è dentro al campo eseguo i controlli successivi
                 if (rAdiac < 0 || rAdiac >= this.height || cAdiac < 0 || cAdiac >= this.width) continue;
+                // mi salvo la cella adiacente prendendola come oggetto
                 let cellAdiac = this.getCella(rAdiac, cAdiac);
+                // se la cella cliccata è una bomba o una cella già cliccata o una bandiera allora salto i controlli successivi
+                // e passo alla prossima cella
                 if (cellAdiac.bomb || cellAdiac.clicked || cellAdiac.flag) continue;
+                // se arriva a sto punto significa che è una cella vuota
+                // allora indico che è stata cliccata
                 cellAdiac.clicked = true;
+                // prendo l'elemento cell
                 let elementoCellaAdiac = this.getCellElement(rAdiac, cAdiac);
+                // aggiungo la classe clicked
                 elementoCellaAdiac.addClass("clicked");
+                // e controllo quante mine ha attorno a se
                 if (cellAdiac.count == 0) {
+                    // se ne ha zero richiamo la funzione (ricorsiva)
                     this.clickEmptyCells(rAdiac, cAdiac);
                 } else {
+                    // se il numero di bombe vicine è diverso da zero, allora aggiungo la classe indicando il numero di bombe adiacenti
                     elementoCellaAdiac.addClass("count-" + cellAdiac.count);
                 }
             }
@@ -310,19 +324,31 @@ class Campo {
     // metodo per contare le mine attorno ad ogni singola cella
     contaMine() {
         // conta le mine nelle celle adiacenti
+        // ciclo per controllare ogni singola cella di tutto il campo
         for (let i = 0; i < this.board.length; i++) {
+            // mi salvo la cella corrente
             let cell = this.board[i];
+            // se la cella contiene una bomba non eseguo i controlli successivi
             if (cell.bomb) continue;
+            // inizializzo il contatore per le bombe a zero
             let count = 0;
+            // ciclo per controllare le righe
             for (let j = -1; j <= 1; j++) {
+                // ciclo per controllare le colonne
                 for (let k = -1; k <= 1; k++) {
+                    // mi salvo riga e colonna della cella adiacente
                     let row = cell.row + j;
                     let col = cell.col + k;
+                    // controllo che sia una cella all'interno del campo
                     if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue;
+                    // prendo l'oggetto della cella adiacente
                     let adjacent = this.getCella(row, col);
+                    // e se la cella adiacente è una bomba incremento il contatore per le bombe
                     if (adjacent.bomb) count++;
                 }
             }
+            // dopo aver controllato tutte le celle adiacenti a quella corrente
+            // aggiorno l'attributo della cella indicando quante mine sono state trovate attorno ad essa
             cell.count = count;
         }
     }
