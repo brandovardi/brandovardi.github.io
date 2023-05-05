@@ -229,10 +229,12 @@ class Campo {
                 if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
                 // misalvo la cella adiacente appena trovata
                 let adjacent = this.getCella(row, col);
+                // prendo l'elemento "cell" in base alla riga e colonna
+                let elem = this.getCellElement(row, col);
                 // se la cella adiacente non ha la bandiera e ha la bomba allora ha perso
                 if (!adjacent.flag && adjacent.bomb) {
                     // indico che la cella è stata cliccata
-                    c1.clicked = true;
+                    adjacent.clicked = true;
                     // aggiungo una classe all'elemento per fare in modo che sia cliccata
                     elem.addClass("clicked");
                     // mostro tutte le mine
@@ -247,21 +249,17 @@ class Campo {
                 }
                 // se la cella adiacente non ha la bandierina allora la scopro
                 if (!adjacent.flag) {
-                    // prendo l'elemento "cell" in base alla riga e colonna
-                    let elem = this.getCellElement(row, col);
-                    // e mi salvo anche l'oggetto cella per poter controllare gli attributi
-                    let c1 = this.getCella(row, col);
                     // indico che la cella è stata cliccata
-                    c1.clicked = true;
+                    adjacent.clicked = true;
                     // aggiungo una classe all'elemento per fare in modo che sia cliccata
                     elem.addClass("clicked");
                     // controllo se il contatore della cella è uguale a zero
-                    if (c1.count == 0) {
+                    if (adjacent.count == 0) {
                         // se è zero la cella è vuota e allora eseguo la funzione apposita per liberare le celle adiacenti senza bombe
                         this.clickEmptyCells(row, col);
                     } else {
                         // altrimenti aggiungo la classe per sapere quante mine ha attorno
-                        elem.addClass("count-" + c1.count);
+                        elem.addClass("count-" + adjacent.count);
                     }
                 }
             }
