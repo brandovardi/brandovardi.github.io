@@ -231,6 +231,10 @@ class Campo {
                 let adjacent = this.getCella(row, col);
                 // se la cella adiacente non ha la bandiera e ha la bomba allora ha perso
                 if (!adjacent.flag && adjacent.bomb) {
+                    // indico che la cella è stata cliccata
+                    c1.clicked = true;
+                    // aggiungo una classe all'elemento per fare in modo che sia cliccata
+                    elem.addClass("clicked");
                     // mostro tutte le mine
                     this.showBombs();
                     // aggiorno l'attributo gameover
