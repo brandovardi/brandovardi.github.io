@@ -4,6 +4,23 @@ $(document).ready(function () {
     if ($('#select').val() == "1") {
         $('#campo_minato').toggleClass($('#select').val(), true);
         let campo = new Campo(8, 8, 10);
+        // controllo i vari casi possibili e creo il campo in base alla scelta
+        if (difficulty == "1") {
+            campo = new Campo(8, 8, 10);
+            changeClass(true, false, false, false);
+        }
+        else if (difficulty == "2") {
+            campo = new Campo(16, 16, 40);
+            changeClass(false, true, false, false);
+        }
+        else if (difficulty == "3") {
+            campo = new Campo(16, 31, 99);
+            changeClass(false, false, true, false);
+        }
+        else {
+            campo = new Campo(8, 8, 10);
+            changeClass(true, false, false, false);
+        }
         campo.clear();
         campo.generaCampo();
     }
