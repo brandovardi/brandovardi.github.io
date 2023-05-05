@@ -116,7 +116,7 @@ button:hover {
     background-color: darkred;
 }
 
-.cell.clicked.bomb {
+.cell.bomb.clicked {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAAAHt7e/8AAP///ywAAAAAEAAQAAACNIyPacLtHx4DUkRJ5RUUeM81G/d9zuYNQ5lZTbqWIsnW7lSDDJq3Y3560UC+SiuIqYwqjgIAOw==");
     background-size: contain;
     background-repeat: no-repeat;
