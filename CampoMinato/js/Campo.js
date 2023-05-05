@@ -25,7 +25,7 @@ class Campo {
         // modifico il testo delle mine restanti
         $('#numeroMine').text("Mine Restanti: " + this.bombe);
         // ciclo for per generare il campo
-        for (let i = 0; i < this.size; i++) {
+        for (let i = 0; i < this.height; i++) {
             // il primo ciclo controlla le righe
             // creo un div che sarà la riga
             let row = $("<div>");
