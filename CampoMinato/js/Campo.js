@@ -214,6 +214,22 @@ class Campo {
         return count;
     }
 
+    // metodo per controllare se l'utente ha piazzato delle bandierine su delle celle dove in realtà la bomba non c'è
+    controllaBandiereSbagliate() {
+        // ciclo per controllare tutto il campo
+        for (let i = 0; i < this.board.length; i++) {
+            // mi salvo la cella corrente
+            let cell = this.board[i];
+            // controllo se la cella corrente ha la bandierina ma non c'è la bomba
+            if (cell.flag && !cell.bomb) {
+                // allora prendo l'elemento della cella corrente
+                let element = this.getCellElement(cell.row, cell.col);
+                // e ci aggiungo la classe per essere poi midoficata con il css
+                element.addClass("flagError");
+            }
+        }
+    }
+
     // metodo per scoprire le celle coperte senza bandierina attorno ad una cella con un contatore, cliccata
     liberaCelle(r, c) {
         // mi salvo la cella cliccata
@@ -231,24 +247,8 @@ class Campo {
                 let adjacent = this.getCella(row, col);
                 // prendo l'elemento "cell" in base alla riga e colonna
                 let elem = this.getCellElement(row, col);
-                // se la cella adiacente non ha la bandiera e ha la bomba allora ha perso
-                if (!adjacent.flag && adjacent.bomb) {
-                    // indico che la cella è stata cliccata
-                    adjacent.clicked = true;
-                    // aggiungo una classe all'elemento per fare in modo che sia cliccata
-                    elem.addClass("clicked");
-                    // mostro tutte le mine
-                    this.showBombs();
-                    // aggiorno l'attributo gameover
-                    this.gameover = true;
-                    // e faccio vedere una scritta sotto al campo
-                    $('#end').show();
-                    $('#end').text("Hai Perso!");
-                    // siccome ha perso esco dal ciclo e termino il controllo
-                    return;
-                }
-                // se la cella adiacente non ha la bandierina allora la scopro
-                if (!adjacent.flag) {
+                // se la cella adiacente non ha la bandierina e non ha la bomba allora la scopro
+                if (!adjacent.flag && !adjacent.bomb) {
                     // indico che la cella è stata cliccata
                     adjacent.clicked = true;
                     // aggiungo una classe all'elemento per fare in modo che sia cliccata
@@ -262,12 +262,34 @@ class Campo {
                         elem.addClass("count-" + adjacent.count);
                     }
                 }
+                // se la cella adiacente non ha la bandiera e ha la bomba allora ha perso
+                if ((!adjacent.flag && adjacent.bomb && !adjacent.clicked)) {
+                    // aggiorno l'attributo gameover
+                    this.gameover = true;
+                    // indico che la cella è stata cliccata
+                    adjacent.clicked = true;
+                    // aggiungo una classe all'elemento per fare in modo che sia cliccata
+                    elem.addClass("clicked");
+                    // se la cella cliccata ha attorno a se più di una bomba allora andrò a modificare tutte le bombe per il css
+                    if (cell.count > 1) {
+                        this.liberaCelle(r, c);
+                    }
+                    // mostro tutte le mine
+                    this.showBombs();
+                    // e faccio vedere una scritta sotto al campo
+                    $('#end').show();
+                    $('#end').text("Hai Perso!");
+                    // siccome ha perso esco dal ciclo e termino il controllo
+                    return;
+                }
             }
         }
     }
 
     // metodo che fa vedere tutte le bombe se l'utente perde
     showBombs() {
+        // vado a controllare se l'utente ha inserito delle bandierine dove in realtù non cìera la mina
+        this.controllaBandiereSbagliate();
         // ciclo per controllare tutto il campo
         for (let i = 0; i < this.board.length; i++) {
             // mi salvo la cella corrente
