@@ -123,7 +123,7 @@ button:hover {
 }
 
 .cell.flag.bomb {
-    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAAAHt7e729vf///ywAAAAAEAAQAAACNIyPacLtHx4DUkRJ5RUUeM81G/d9zuYNQ5lZTbqWIsnW7lSDDJq3Y3560UC+SiuIqYwqjgIAOw==");
+    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPIAAAAAAHt7e729vf8AAP///wAAAAAAAAAAACwAAAAAEAAQAAADRBi63CowyhkmBFbUMSSOnAaFQFkKoTgOZpmqAsARLhtVl8xyJ1S1OlYLZuIIP0SdEolbFTs30LEWRUFjUp/VIwk1M5MEADs=");
     background-size: contain;
     background-repeat: no-repeat;
 }
