@@ -2,6 +2,10 @@ const classi = ['1', '2', '3', 'P'];
 
 $(document).ready(function () {
 
+    $('#pSecure').click(function () {
+        $('#secureStart').prop('checked', !$('#secureStart').is(':checked'));
+    });
+
     // if per quando si carica la pagina per la prima volta
     if ($('#select').val() == "1") {
         $('#campo_minato').toggleClass($('#select').val(), true);
