@@ -143,8 +143,10 @@ class Campo {
         let c1 = this.getCella(row, col);
         // controllo se è il èrimo click dell'utente e se ha selezionato la checkbox per la "Partenza sicura"
         if (this.fisrtRightClick && this.controllaCheckBox()) {
-            this.partenzaSicura(c1);
-            this.fisrtRightClick = false;
+            if (c1.count == 0) {
+                this.partenzaSicura(c1);
+                this.fisrtRightClick = false;
+            }
         }
         // se la cella è già stata cliccata
         if (c1.clicked) {
