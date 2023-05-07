@@ -169,7 +169,6 @@ button:hover {
 #pSecure:hover {
     text-decoration: underline;
     cursor: context-menu;
-    user-select: none;
 }
 
 #numeroMine {
@@ -181,6 +180,11 @@ select {
 }
 
 p {
+    user-select: none;
     margin-left: 46%;
     margin-right: 46%;
+}
+
+span {
+    user-select: none;
 }
