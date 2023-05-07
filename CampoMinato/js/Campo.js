@@ -10,6 +10,8 @@ class Campo {
         this.win = false; // controllo per sapere se ha vinto
         this.board = []; // vettore che conterrà tutte le celle (div) del campo
         this.flags = 0; // numero delle bandierine piazzate dall'utente
+        this.fisrtRightClick = true; // variabile per controllare quando l'utente clicca per la prima volta sul campo
+        this.classi = ['count-1', 'count-2', 'count-3', 'count-4', 'count-5', 'count-6', 'count-7', 'count-8'];
     }
 
     // metodo per pulire lo schermo togliendo il campo
@@ -28,7 +30,7 @@ class Campo {
         for (let i = 0; i < this.height; i++) {
             // il primo ciclo controlla le righe
             // creo un div che sarà la riga
-            let row = $("<div>");
+            let row = $("<div class='cell-row'>");
             // il secondo ciclo controllerà ogni colonna presente per ciascuna riga
             for (let j = 0; j < this.width; j++) {
                 // creo la colonna numero "j" per la riga "i"
@@ -139,6 +141,11 @@ class Campo {
         let col = parseInt(cell.attr("data-col"));
         // mi salvo l'oggetto della cella cliccata
         let c1 = this.getCella(row, col);
+        // controllo se è il èrimo click dell'utente e se ha selezionato la checkbox per la "Partenza sicura"
+        if (this.fisrtRightClick && this.controllaCheckBox()) {
+            this.partenzaSicura(c1);
+            this.fisrtRightClick = false;
+        }
         // se la cella è già stata cliccata
         if (c1.clicked) {
             // controllo se nella cella è presente un numero di mine diverso da zero
@@ -187,6 +194,56 @@ class Campo {
                 $('#end').show();
                 $('#end').text("Hai Vinto!");
             }
+        }
+    }
+
+    // metodo per permette una partenza sicura, ovvero senza perdere al primo click
+    partenzaSicura(cell) {
+        // se la cella cliccata ha la bomba allora la tolgo
+        if (cell.bomb) {
+            // tolgo la bomba dalla cella cliccata
+            cell.bomb = false;
+            for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
+                for (let k = -1; k <= 1; k++) { // il secondo ciclo controlla le celle della riga
+                    // vado a prendere la cella adiacente alla riga "cell.row + j" e colonna "cell.col + k"
+                    let row = cell.row + j;
+                    let col = cell.col + k;
+                    // controllo che la riga e colonna non siano minori di zero e che non superino le dimensioni massime del campo
+                    if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
+                    // mi salvo la cella adiacente
+                    let adjacent = this.getCella(row, col);
+                    // mi salvo anche l'elemento della cella adiacente
+                    let elemAdiac = this.getCellElement(row, col);
+                    // se trovo una bomba attorno alla cella cliccata allora incremento il contatore della cella
+                    if (adjacent.bomb) cell.count++;
+                    // se il contatore della cella adiacente corrente è maggiore di zero
+                    if (adjacent.count > 0 && (j | k)) {
+                        // allora diminuisco il contatore della cella
+                        adjacent.count--;
+                        
+                        this.classi.forEach(i => {
+                            elemAdiac.toggleClass(i, false);
+                        });
+                        
+                        let x = this.getCellElement(cell.row, cell.col);
+                        x.addClass("count-" + cell.count);
+                        // se diventa zero allora libero anche le altre celle
+                        if (adjacent.count == 0) {
+                            this.clickEmptyCells(adjacent.row, adjacent.col);
+                        }
+                        if (adjacent.clicked) {
+                            // altrimenti se ha delle mine attorno aggiorno la classe indicando appunto quante mine ha attorno
+                            elemAdiac.addClass("count-" + adjacent.count);
+                        }
+                    }
+                }
+            }
+            let k;
+            do {
+                k = this.getRandomCell();
+            } while (k.bomb);
+            k.bomb = true;
+            if (k.count > 0) k.count = 0;
         }
     }
 
@@ -409,5 +466,11 @@ class Campo {
         }
         // se esce dal ciclo non ha trovato la cella e ritorno null
         return null;
+    }
+    
+    // metodo per controllare se la checkbox per la "partenza sicura" è stata selezionata oppure no
+    controllaCheckBox() {
+        // ritorno il valore corrente della checkbox
+        return ($('#secureStart').is(':checked')) ? true : false;
     }
 }
