@@ -1,3 +1,5 @@
+const classi = ['1', '2', '3', 'P'];
+
 $(document).ready(function () {
 
     // if per quando si carica la pagina per la prima volta
@@ -8,11 +10,14 @@ $(document).ready(function () {
         campo.generaCampo();
     }
     
-    function changeClass($1, $2, $3, $P) {
-        $('#campo_minato').toggleClass('1', $1);
-        $('#campo_minato').toggleClass('2', $2);
-        $('#campo_minato').toggleClass('3', $3);
-        $('#campo_minato').toggleClass('P', $P);
+    // metodo per cambiare classe al campo in base alla difficoltà scelta
+    function changeClass($val) {
+        // se i valori passati sono maggiori delle classe presenti nel gioco allora non faccio nulla
+        if ($val.length > classi.length) return;
+        // ciclo per cambiare la classe del campo
+        for (let i = 0; i < classi.length; i++) {
+            $('#campo_minato').toggleClass(classi[i], $val[i]);
+        }
     }
 
     // quando cambio l'opzione della select
@@ -25,24 +30,36 @@ $(document).ready(function () {
         if (difficulty == "1") {
             campo = new Campo(8, 8, 10);
             $('#personalizza').css({display:'none'});
-            changeClass(true, false, false, false);
+            changeClass([true, false, false, false]);
         }
         else if (difficulty == "2") {
             campo = new Campo(16, 16, 40);
             $('#personalizza').css({display:'none'});
-            changeClass(false, true, false, false);
+            changeClass([false, true, false, false]);
         }
         else if (difficulty == "3") {
             campo = new Campo(16, 31, 99);
             $('#personalizza').css({display:'none'});
-            changeClass(false, false, true, false);
+            changeClass([false, false, true, false]);
         }
         else if (difficulty == "P") {
             // se l'utente vuole personalizzare il campo allora rendo visibile il div per personalizzare
             $('#personalizza').css({display:'block'});
+            // prendo l'elemento campo_minato
+            let boardClass = $('#campo_minato');
+            // imposto già dei dati predefiniti nei campi personalizzabili in base alla difficoltà scelta...
+            // ...(quindi controllo la classe del campo)
+            if (boardClass.hasClass('1')) {
+                impostaValoriDefaultPersonal('8', '8', '10');
+            }
+            else if (boardClass.hasClass('2')) {
+                impostaValoriDefaultPersonal('16', '16', '10');
+            }
+            else if (boardClass.hasClass('3')) {
+                impostaValoriDefaultPersonal('16', '31', '10');
+            }
             return;
         }
-
         // pulisco il campo prima di ridisegnarlo 
         campo.clear();
         // e lo genero
@@ -50,6 +67,15 @@ $(document).ready(function () {
         // nascondo il div utile per sapere se si ha vinto o perso alla fine del gioco
         $('#end').hide();
     });
+
+    // funzione per impostare dei valori predefiniti quando si vuole personalizzare il campo
+    // (usciranno i valori della difficoltà attuale)
+    function impostaValoriDefaultPersonal(x1, x2, x3) {
+        // cambio direttamente i valori
+        $('#Maxh').val(x1);
+        $('#Maxw').val(x2);
+        $('#numBomb').val(x3);
+    }
 
     // quando viene premuto il pulsante ok del div per personalizzare
     $('#OKButton').click(function () {
@@ -71,7 +97,7 @@ $(document).ready(function () {
         // nascondo il campo div per personalizzare
         $('#personalizza').css({display:'none'});
         // modifico la classe del campo
-        changeClass(false, false, false, true);
+        changeClass([false, false, false, true]);
         // poi pulisco e rigenero il campo
         campo.clear();
         campo.generaCampo();
@@ -86,19 +112,19 @@ $(document).ready(function () {
         // in base alla classe modifico il valore nella select
         if (x.hasClass('1')) {
             $('#select').val('1');
-            changeClass(true, false, false, false);
+            changeClass([true, false, false, false]);
         }
         else if (x.hasClass('2')) {
             $('#select').val('2');
-            changeClass(false, true, false, false);
+            changeClass([false, true, false, false]);
         }
         else if (x.hasClass('3')) {
             $('#select').val('3');
-            changeClass(false, false, true, false);
+            changeClass([false, false, true, false]);
         }
         else if (x.hasClass('P')) {
             $('#select').val('P');
-            changeClass(false, false, false, true);
+            changeClass([false, false, false, true]);
         }
     });
 
@@ -140,7 +166,7 @@ $(document).ready(function () {
                     // se sono stati inseriti correttamente allora creo i campi con i dati precedenti
                     campo = new Campo(alt, larg, mine);
                     $('#select').val('P');
-                    changeClass(false, false, false, true);
+                    changeClass([false, false, false, true]);
                 }
             }
             else {
@@ -150,21 +176,19 @@ $(document).ready(function () {
                 if (x.hasClass('1')) {
                     campo = new Campo(8, 8, 10);
                     $('#select').val('1');
-                    changeClass(true, false, false, false);
+                    changeClass([true, false, false, false]);
                 }
                 else if (x.hasClass('2')) {
                     campo = new Campo(16, 16, 40);
                     $('#select').val('2');
-                    changeClass(false, true, false, false);
+                    changeClass([false, true, false, false]);
                 }
                 else if (x.hasClass('3')) {
                     campo = new Campo(16, 31, 99);
                     $('#select').val('3');
-                    changeClass(false, false, true, false);
+                    changeClass([false, false, true, false]);
                 }
             }
-            // alla fine nascondo il div per personalizzare
-            $('#personalizza').css({display:'none'});
         }
         // poi pulisco e rigenero il campo
         campo.clear();
