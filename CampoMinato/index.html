@@ -11,9 +11,6 @@
         <div align="center" class="header">
             <div class="content">
                 <select name="" id="select">
-                    <!--
-                        <option id="first"></option>
-                    -->
                     <option selected value="1">Principiante</option>
                     <option value="2">Intermedio</option>
                     <option value="3">Avanzato</option>
@@ -29,25 +26,28 @@
                 Mine Restanti: 10
             </div>
         </div>
-        <br>
+
+        <p align="center" title="La prima mossa aprirà sempre diverse caselle utili.">
+            <input type="checkbox" id="secureStart"><span id="pSecure">Partenza Sicura</span>
+        </p>
+
         <div id="campo_minato" align="center"></div>
-        
         <br>
         <div id="personalizza" style="display: none;" align="center">
             <h2>Impostazioni personalizzate</h2>
             <table border="0">
-                    <tr>
-                        <td>Altezza del gioco:</td>
-                        <td><input type="number" id="Maxh" size="3" value=""></td>
-                    </tr>
-                    <tr>
-                        <td>Larghezza del gioco:</td>
-                        <td><input type="number" id="Maxw" size="3" value=""></td>
-                    </tr>
-                    <tr>
-                        <td>Numero di bombe:</td>
-                        <td><input type="number" id="numBomb" size="3" value=""></td>
-                    </tr>
+                <tr>
+                    <td>Altezza del gioco:</td>
+                    <td><input type="number" id="Maxh" size="3" value=""></td>
+                </tr>
+                <tr>
+                    <td>Larghezza del gioco:</td>
+                    <td><input type="number" id="Maxw" size="3" value=""></td>
+                </tr>
+                <tr>
+                    <td>Numero di bombe:</td>
+                    <td><input type="number" id="numBomb" size="3" value=""></td>
+                </tr>
             </table>
             <p>
                 <input type="button" id="OKButton" value="OK">
