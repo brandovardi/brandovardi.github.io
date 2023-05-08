@@ -86,10 +86,10 @@ $(document).ready(function () {
                 impostaValoriDefaultPersonal('8', '8', '10');
             }
             else if (boardClass.hasClass('2')) {
-                impostaValoriDefaultPersonal('16', '16', '10');
+                impostaValoriDefaultPersonal('16', '16', '40');
             }
             else if (boardClass.hasClass('3')) {
-                impostaValoriDefaultPersonal('16', '31', '10');
+                impostaValoriDefaultPersonal('16', '31', '99');
             }
             return;
         }
@@ -163,23 +163,29 @@ $(document).ready(function () {
 
     // quando viene premuto il pulsante "restart"
     $('#restart').click(function () {
-        // mi salvo il valore nella select in modo tale che resetto la pagina mantenendo lo stesso "livello" scelto precedentemente
-        let k = $('#select').val();
+        // mi salvo il campo minato perché mi servirà controllare la classe
+        let x = $('div#campo_minato');
         // nascondo la scritta visibile alla fine del gioco
         $('#end').hide();
         // inizializzo un campo undefined
         let campo;
         // e in base alla scelta "resetto" il campo
-        if (k == "1") {
+        if (x.hasClass('1')) {
             campo = new Campo(8, 8, 10);
+            $('#select').val('1');
+            changeClass([true, false, false, false]);
         }
-        else if (k == "2") {
+        else if (x.hasClass('2')) {
             campo = new Campo(16, 16, 40);
+            $('#select').val('2');
+            changeClass([false, true, false, false]);
         }
-        else if (k == "3") {
+        else if (x.hasClass('3')) {
             campo = new Campo(16, 31, 99);
+            $('#select').val('3');
+            changeClass([false, false, true, false]);
         }
-        else if (k == "P") {
+        else if (x.hasClass('P')) {
             // se l'utente resetta il campo è c'è l'opzione personalizzata selezionata
             // mi salvo i valori precedentemente inseriti
             let alt = $('#Maxh').val();
@@ -202,27 +208,9 @@ $(document).ready(function () {
                     changeClass([false, false, false, true]);
                 }
             }
-            else {
-                // mi salvo il campo minato perché mi servirà controllare la classe
-                let x = $('div#campo_minato');
-                // in base alla classe modifico il valore nella select
-                if (x.hasClass('1')) {
-                    campo = new Campo(8, 8, 10);
-                    $('#select').val('1');
-                    changeClass([true, false, false, false]);
-                }
-                else if (x.hasClass('2')) {
-                    campo = new Campo(16, 16, 40);
-                    $('#select').val('2');
-                    changeClass([false, true, false, false]);
-                }
-                else if (x.hasClass('3')) {
-                    campo = new Campo(16, 31, 99);
-                    $('#select').val('3');
-                    changeClass([false, false, true, false]);
-                }
-            }
         }
+        // nascondo il div per personalizzare
+        $('#personalizza').css({display:'none'});
         // poi pulisco e rigenero il campo
         campo.clear();
         campo.generaCampo();
