@@ -143,13 +143,13 @@ class Campo {
         let c1 = this.getCella(row, col);
         // controllo se è il èrimo click dell'utente e se ha selezionato la checkbox per la "Partenza sicura"
         if (this.fisrtRightClick && this.controllaCheckBox()) {
-            if (c1.count == 0) {
+            if (c1.count == 0 && c1.bomb) {
                 this.partenzaSicura(c1);
-                this.fisrtRightClick = false;
             }
+            this.fisrtRightClick = false;
         }
         // se la cella è già stata cliccata
-        if (c1.clicked) {
+        if (c1.clicked && $('#secureNeighbour').is(':checked')) {
             // controllo se nella cella è presente un numero di mine diverso da zero
             // e con il metodo "controllaBandierine" vado a controllare se il numero delle bandierine inserite dall'utente attorno alla cella cliccata...
             // ...è uguale al numero di bombe che ha attorno
@@ -199,8 +199,11 @@ class Campo {
         }
     }
 
+    // metodo che restituisce il numero di bombe attorno ad una cella
     contaBombe(cell) {
+        // inizializzo un contatore per le bombe
         let count = 0;
+        // ciclo per controllare le righe attorno alla cella
         for (let j = -1; j <= 1; j++) {
             // ciclo per controllare le colonne
             for (let k = -1; k <= 1; k++) {
@@ -221,7 +224,7 @@ class Campo {
     // metodo per permette una partenza sicura, ovvero senza perdere al primo click
     partenzaSicura(cell) {
         // se la cella cliccata ha la bomba allora la tolgo
-        if (cell.bomb && this.contaBombe(cell) == 0) {
+        if (cell.bomb) {
             // tolgo la bomba dalla cella cliccata
             cell.bomb = false;
             for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
@@ -241,7 +244,7 @@ class Campo {
                     if (adjacent.count > 0 && (j | k)) {
                         // allora diminuisco il contatore della cella
                         adjacent.count--;
-
+                        // tolgo tutte le classi per i contatori perché le modificherò in seguito
                         this.classi.forEach(function (i) {
                             elemAdiac.toggleClass(i, false);
                         });
@@ -261,18 +264,34 @@ class Campo {
                 }
             }
         }
-        else if (cell.bomb) {
-            // tolgo la bomba dalla cella cliccata
-            cell.bomb = false;
-            // aggiorno il contatore della cella in base a quante bombe ha attorno
-            cell.count = this.contaBombe(cell);
-        }
-        let k;
+        // inizializzo una variabile per salvarci poi una cella
+        let c2;
+        // ciclo per cercare una cella vuota in cui mettere la bomba
         do {
-            k = this.getRandomCell();
-        } while (k.bomb && (k.row != cell.row) && (k.col != cell.col));
-        k.bomb = true;
-        k.count = 0;
+            // prendo una cella casuale
+            c2 = this.getRandomCell();
+            // continuo a cercare una cella che non sia quella appena cliccata e che non abbia già una bomba
+        } while (c2.clicked && (c2.bomb || ((c2.row == cell.row) && (c2.col == cell.col))));
+        // ci piazzo la bomba
+        c2.bomb = true;
+        // e azzero il contatore
+        c2.count = 0;
+        // infine aggiorno il contatore delle celle attorno alla mina appena piazzata
+        for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
+            for (let k = -1; k <= 1; k++) { // il secondo ciclo controlla le celle della riga
+                // vado a prendere la cella adiacente alla riga "cell.row + j" e colonna "cell.col + k"
+                let row = c2.row + j;
+                let col = c2.col + k;
+                // controllo che la riga e colonna non siano minori di zero e che non superino le dimensioni massime del campo
+                if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
+                // mi salvo la cella adiacente
+                let adjacent = this.getCella(row, col);
+                // se trovo una bomba non faccio niente
+                if (!adjacent.bomb) continue;
+                // altrimenti incremento il contatore della cella adiacente
+                adjacent.count++;
+            }
+        }
     }
 
     // metodo che ritorna il numero delle bandierine attorno ad una cella
