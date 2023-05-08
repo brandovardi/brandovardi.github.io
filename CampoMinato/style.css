@@ -171,6 +171,11 @@ button:hover {
     cursor: context-menu;
 }
 
+#vSecure:hover {
+    text-decoration: underline;
+    cursor: context-menu;
+}
+
 #numeroMine {
     user-select: none;
 }
@@ -181,8 +186,6 @@ select {
 
 p {
     user-select: none;
-    margin-left: 46%;
-    margin-right: 46%;
 }
 
 span {
