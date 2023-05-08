@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Campo Minato</title>
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -27,9 +29,21 @@
             </div>
         </div>
 
-        <p align="center" title="La prima mossa aprirà sempre diverse caselle utili.">
-            <input type="checkbox" id="secureStart"><span id="pSecure">Partenza Sicura</span>
-        </p>
+        <table align="center">
+            <tr>
+                <td>
+                    <p id="partenzasicura" align="center" title="La prima mossa aprirà una casella senza mina.">
+                        <input type="checkbox" id="secureStart"><span id="pSecure">Partenza Sicura</span>
+                    </p>
+                </td>
+                <td>
+                    <p id="vicinatosicuro" align="center" title="Cliccando su una casella numerata/soddisfatta si apriranno tutte le caselle vicine.">
+                        <input type="checkbox" id="secureNeighbour"><span id="vSecure">Vicinato in sicurezza</span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+
 
         <div id="campo_minato" align="center"></div>
         <br>
