@@ -2,9 +2,38 @@ const classi = ['1', '2', '3', 'P'];
 
 $(document).ready(function () {
 
+    // funzione per cambiare lo sfondo al testo in base se la checkbox è attiva o meno 
+    function change (change, check) {
+        if (check.is(':checked')) {
+            change.css({background:"orange"});
+        }
+        else {
+            change.css({background:"#FFFFFF"});
+        }
+    }
+
+    //////////////////////////////////////////
+    // partenza sicura
     $('#pSecure').click(function () {
         $('#secureStart').prop('checked', !$('#secureStart').is(':checked'));
+        change($(this), $('#secureStart'));
     });
+    //---------------------------------------
+    $('#secureStart').change(function() {
+        change($('#pSecure'), $(this));
+    });
+
+    //////////////////////////////////////////
+    // vicinato sicuro
+    $('#secureNeighbour').change(function() {
+        change($('#vSecure'), $(this));
+    });
+    //---------------------------------------
+    $('#vSecure').click(function () {
+        $('#secureNeighbour').prop('checked', !$('#secureNeighbour').is(':checked'));
+        change($(this), $('#secureNeighbour'));
+    });
+    //////////////////////////////////////////
 
     // if per quando si carica la pagina per la prima volta
     if ($('#select').val() == "1") {
