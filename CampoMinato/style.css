@@ -139,7 +139,7 @@ button:hover {
     background-position: center;
 }
 
-#numeroMine, span, p, select, #restart {
+#numeroMine, span, p, select, #restart, br {
     user-select: none;
 }
 
