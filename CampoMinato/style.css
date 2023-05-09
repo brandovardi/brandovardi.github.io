@@ -177,7 +177,11 @@ span {
     user-select: none;
 }
 
-td:hover {
+#partS:hover {
+    background-color: rgb(255, 201, 102);
+}
+
+#vicS:hover {
     background-color: rgb(255, 201, 102);
 }
 
