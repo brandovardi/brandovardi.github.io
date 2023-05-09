@@ -121,10 +121,6 @@ button {
     background-color: rgb(171, 13, 13);
 }
 
-#restart {
-    user-select: none;
-}
-
 button:hover {
     background-color: darkred;
 }
@@ -143,54 +139,15 @@ button:hover {
     background-position: center;
 }
 
-#pSecure:hover {
-    text-decoration: underline;
-    cursor: context-menu;
-}
-
-#vSecure:hover {
-    text-decoration: underline;
-    cursor: context-menu;
-}
-
-#pSecure {
-    background: white;
-}
-
-#vSecure {
-    background: white;
-}
-
-#numeroMine {
+#numeroMine, span, p, select, #restart {
     user-select: none;
 }
 
-select {
-    user-select: none;
-}
-
-p {
-    user-select: none;
-}
-
-span {
-    user-select: none;
-}
-
-#partS:hover {
+#partS:hover, #vicS:hover {
     background-color: rgb(255, 201, 102);
 }
 
-#vicS:hover {
-    background-color: rgb(255, 201, 102);
-}
-
-#partS {
-    border: 2px solid black;
-    line-height: 10%;
-}
-
-#vicS {
+#partS, #vicS {
     border: 2px solid black;
     line-height: 10%;
 }
