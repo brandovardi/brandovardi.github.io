@@ -5,7 +5,7 @@ $(document).ready(function () {
     // funzione per cambiare lo sfondo al testo in base se la checkbox è attiva o meno 
     function change (td) {
         if (td.css('background-color') === 'rgb(255, 160, 0)') {
-            td.css('background-color', 'rgb(255, 255, 255)');
+            td.css('background-color', '');
         }
         else {
             td.css('background-color', 'rgb(255, 160, 0)');
