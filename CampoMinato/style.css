@@ -177,6 +177,10 @@ span {
     user-select: none;
 }
 
+td:hover {
+    background-color: rgb(255, 201, 102);
+}
+
 #partS {
     border: 2px solid black;
     line-height: 10%;
