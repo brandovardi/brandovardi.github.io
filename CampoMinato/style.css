@@ -177,7 +177,12 @@ span {
     user-select: none;
 }
 
-td {
+#partS {
+    border: 2px solid black;
+    line-height: 10%;
+}
+
+#vicS {
     border: 2px solid black;
     line-height: 10%;
 }
