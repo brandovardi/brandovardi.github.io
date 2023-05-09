@@ -141,15 +141,19 @@ class Campo {
         let col = parseInt(cell.attr("data-col"));
         // mi salvo l'oggetto della cella cliccata
         let c1 = this.getCella(row, col);
-        // controllo se è il èrimo click dell'utente e se ha selezionato la checkbox per la "Partenza sicura"
-        if (this.fisrtRightClick && this.controllaCheckBox()) {
+        // variabile per controllare se l'utente al primo click prende una bomba
+        // e quindi dovendola ripiazzare servirà effettuare altri controlli successivamente
+        let bombaPrimoClick = false;
+        // controllo se è il èrimo click dell'utente e se ha selezionato l'opzione per la "Partenza sicura"
+        if (this.fisrtRightClick && ($('#partS').css('background-color') == 'rgb(255, 160, 0)')) {
             if (c1.count == 0 && c1.bomb) {
                 this.partenzaSicura(c1);
+                bombaPrimoClick = true;
             }
             this.fisrtRightClick = false;
         }
-        // se la cella è già stata cliccata
-        if (c1.clicked && $('#secureNeighbour').is(':checked')) {
+        // se la cella è già stata cliccata (e controllo se è stata selezionata l'opzione)
+        if (c1.clicked && ($('#vicS').css('background-color') == 'rgb(255, 160, 0)')) {
             // controllo se nella cella è presente un numero di mine diverso da zero
             // e con il metodo "controllaBandierine" vado a controllare se il numero delle bandierine inserite dall'utente attorno alla cella cliccata...
             // ...è uguale al numero di bombe che ha attorno
@@ -196,6 +200,38 @@ class Campo {
                 $('#end').show();
                 $('#end').text("Hai Vinto!");
             }
+            // controllo la variabile precedentemente creata appunto per sapere se l'utente ha beccato una bomba o no
+            if (bombaPrimoClick) {
+                // inizializzo una variabile per salvarci poi una cella
+                let c2;
+                // ciclo per cercare una cella vuota in cui mettere la bomba
+                do {
+                    // prendo una cella casuale
+                    c2 = this.getRandomCell();
+                    // continuo a cercare una cella che non sia quella appena cliccata e che non abbia già una bomba
+                } while (c2.clicked || (c2.bomb || ((c2.row == cell.row) && (c2.col == cell.col))));
+                // ci piazzo la bomba
+                c2.bomb = true;
+                // e azzero il contatore
+                c2.count = 0;
+                // infine aggiorno il contatore delle celle attorno alla mina appena piazzata
+                for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
+                    for (let k = -1; k <= 1; k++) { // il secondo ciclo controlla le celle della riga
+                        // vado a prendere la cella adiacente alla riga "cell.row + j" e colonna "cell.col + k"
+                        let row = c2.row + j;
+                        let col = c2.col + k;
+                        // controllo che la riga e colonna non siano minori di zero e che non superino le dimensioni massime del campo
+                        if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
+                        // mi salvo la cella adiacente
+                        let adjacent = this.getCella(row, col);
+                        // se trovo una bomba non faccio niente
+                        if (adjacent.bomb) continue;
+                        // altrimenti incremento il contatore della cella adiacente
+                        adjacent.count++;
+                        if (adjacent.clicked) this.getCellElement(adjacent.row, adjacent.col).addClass("count-" + adjacent.count);
+                    }
+                }
+            }
         }
     }
 
@@ -227,6 +263,7 @@ class Campo {
         if (cell.bomb) {
             // tolgo la bomba dalla cella cliccata
             cell.bomb = false;
+            this.getCellElement(cell.row, cell.col).removeClass("bomb");
             for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
                 for (let k = -1; k <= 1; k++) { // il secondo ciclo controlla le celle della riga
                     // vado a prendere la cella adiacente alla riga "cell.row + j" e colonna "cell.col + k"
@@ -262,34 +299,6 @@ class Campo {
                         }
                     }
                 }
-            }
-        }
-        // inizializzo una variabile per salvarci poi una cella
-        let c2;
-        // ciclo per cercare una cella vuota in cui mettere la bomba
-        do {
-            // prendo una cella casuale
-            c2 = this.getRandomCell();
-            // continuo a cercare una cella che non sia quella appena cliccata e che non abbia già una bomba
-        } while (c2.clicked && (c2.bomb || ((c2.row == cell.row) && (c2.col == cell.col))));
-        // ci piazzo la bomba
-        c2.bomb = true;
-        // e azzero il contatore
-        c2.count = 0;
-        // infine aggiorno il contatore delle celle attorno alla mina appena piazzata
-        for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
-            for (let k = -1; k <= 1; k++) { // il secondo ciclo controlla le celle della riga
-                // vado a prendere la cella adiacente alla riga "cell.row + j" e colonna "cell.col + k"
-                let row = c2.row + j;
-                let col = c2.col + k;
-                // controllo che la riga e colonna non siano minori di zero e che non superino le dimensioni massime del campo
-                if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
-                // mi salvo la cella adiacente
-                let adjacent = this.getCella(row, col);
-                // se trovo una bomba non faccio niente
-                if (!adjacent.bomb) continue;
-                // altrimenti incremento il contatore della cella adiacente
-                adjacent.count++;
             }
         }
     }
@@ -513,11 +522,5 @@ class Campo {
         }
         // se esce dal ciclo non ha trovato la cella e ritorno null
         return null;
-    }
-    
-    // metodo per controllare se la checkbox per la "partenza sicura" è stata selezionata oppure no
-    controllaCheckBox() {
-        // ritorno il valore corrente della checkbox
-        return ($('#secureStart').is(':checked')) ? true : false;
     }
 }
