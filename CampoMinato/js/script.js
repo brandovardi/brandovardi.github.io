@@ -3,35 +3,25 @@ const classi = ['1', '2', '3', 'P'];
 $(document).ready(function () {
 
     // funzione per cambiare lo sfondo al testo in base se la checkbox è attiva o meno 
-    function change (change, check) {
-        if (check.is(':checked')) {
-            change.css({background:"orange"});
+    function change (td) {
+        if (td.css('background-color') === 'rgb(255, 160, 0)') {
+            td.css('background-color', 'rgb(255, 255, 255)');
         }
         else {
-            change.css({background:"#FFFFFF"});
+            td.css('background-color', 'rgb(255, 160, 0)');
         }
     }
 
     //////////////////////////////////////////
     // partenza sicura
-    $('#pSecure').click(function () {
-        $('#secureStart').prop('checked', !$('#secureStart').is(':checked'));
-        change($(this), $('#secureStart'));
-    });
-    //---------------------------------------
-    $('#secureStart').change(function() {
-        change($('#pSecure'), $(this));
+    $('#partS').click(function () {
+        change($(this));
     });
 
     //////////////////////////////////////////
     // vicinato sicuro
-    $('#secureNeighbour').change(function() {
-        change($('#vSecure'), $(this));
-    });
-    //---------------------------------------
-    $('#vSecure').click(function () {
-        $('#secureNeighbour').prop('checked', !$('#secureNeighbour').is(':checked'));
-        change($(this), $('#secureNeighbour'));
+    $('#vicS').click(function () {
+        change($(this));
     });
     //////////////////////////////////////////
 
