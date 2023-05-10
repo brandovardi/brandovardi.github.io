@@ -144,11 +144,27 @@ class Campo {
         // variabile per controllare se l'utente al primo click prende una bomba
         // e quindi dovendola ripiazzare servirà effettuare altri controlli successivamente
         let bombaPrimoClick = false;
-        // controllo se è il èrimo click dell'utente e se ha selezionato l'opzione per la "Partenza sicura"
+        // controllo se è il primo click dell'utente e se ha selezionato l'opzione per la "Partenza sicura"
         if (this.fisrtRightClick && ($('#partS').css('background-color') == 'rgb(255, 160, 0)')) {
             if (c1.count == 0 && c1.bomb) {
                 this.partenzaSicura(c1);
                 bombaPrimoClick = true;
+            }
+            // sistemo anche le celle attorno a quella cliccata
+            for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
+                for (let k = -1; k <= 1; k++) { // il secondo ciclo controlla le celle della riga
+                    // vado a prendere la cella adiacente alla riga "cell.row + j" e colonna "cell.col + k"
+                    let row = c1.row + j;
+                    let col = c1.col + k;
+                    // controllo che la riga e colonna non siano minori di zero e che non superino le dimensioni massime del campo
+                    if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
+                    // mi salvo la cella adiacente
+                    let adjacent = this.getCella(row, col);
+                    
+                    if (adjacent.count == 0 && adjacent.bomb) {
+                        this.partenzaSicura(adjacent);
+                    }
+                }
             }
             this.fisrtRightClick = false;
         }
