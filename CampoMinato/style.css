@@ -4,9 +4,6 @@
     border: 1px solid black;
     
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAHt7e729vf///wAAACwAAAAAEAAQAAACKpSPGckXYIKcVAIoqn541xt5E5iJVmdyoUmmasmi8Sq2Kchd+q7n/A8oAAA7");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 
     cursor: pointer;
     vertical-align: middle;
@@ -19,76 +16,58 @@
 
 .cell.clicked {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPAAAHt7e729vSwAAAAAEAAQAAACHYSPacHtD550cc5qYZZ4s+6Bm5iRlnl5lNqgHMsUADs=");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.bomb {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAAAHt7e729vf///ywAAAAAEAAQAAACNIyPacLtHx4DUkRJ5RUUeM81G/d9zuYNQ5lZTbqWIsnW7lSDDJq3Y3560UC+SiuIqYwqjgIAOw==");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.flag {
     background-image: url("data:image/gif;base64,R0lGODdhEAAPAPIAAAAAAHt7e729vf8AAP///wAAAAAAAAAAACwAAAAAEAAPAAADOUi63NJwiaCEvdgGSvIY2VZZ3xdyZAliYpeaLIrBV5sJwDliebzjgKDPFSwWNTKjEfm7MSebqFSaAAA7");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.clicked.count-1 {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAA/3t7e729vQAAACwAAAAAEAAQAAACKYyPacLtH550UQIgq7sYPt5RG5hZV/mdXho2WsOhDBi7Iy1O06vb/VMAADs=");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.clicked.count-2 {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAB7AHt7e729vQAAACwAAAAAEAAQAAACLYyPacLtH550kYGLL7W5t4o5IVNNo1CKJ/p4G7d+MDCRc0fbAp7JtZT66YSNAgA7");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.clicked.count-3 {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAHt7e729vf8AAAAAACwAAAAAEAAQAAACLISPacHtD550MYiLMWW5i1ZNGhNKY1Ba3eZ4rHiBExeTtFejtyvPUurTBR0FADs=");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.clicked.count-4 {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAAe3t7e729vQAAACwAAAAAEAAQAAACLoyPacLtH550sYErLqBOZ9xU3zZyjFeGp8aCQtW26oQy4lO/U2rv+b2bBU3DRgEAOw==");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.clicked.count-5 {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAHsAAHt7e729vQAAACwAAAAAEAAQAAACKYyPacLtH550UYCLc6u5g81gE2hdI8N5JqmK6OkK1RSnLXuTJ7VDvVMAADs=");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.clicked.count-6 {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAB7e3t7e729vQAAACwAAAAAEAAQAAACLIyPacLtH550kYGLL7U5b4FNTRWKAtmVDJpqKwc4Kiu7J9yOTRvrJvQDBhsFADs=");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.clicked.count-7 {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAAAHt7e729vQAAACwAAAAAEAAQAAACKoyPacLtH550UYCLc6u5gz0xGBiOTCWZZ3lRk7qmrfvAsWMLaEjzvc8oAAA7");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .cell.clicked.count-8 {
     background-image: url("data:image/gif;base64,R0lGODdhEAAQAPAAAHt7e729vSwAAAAAEAAQAAACKYSPacHtD550kanV6j3ZYl8F2id+4UZlV1qGbfeqJ7hacsJOkqvDvVMAADs=");
+}
+
+.cell.bomb.clicked {
+    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAAAHt7e/8AAP///ywAAAAAEAAQAAACNIyPacLtHx4DUkRJ5RUUeM81G/d9zuYNQ5lZTbqWIsnW7lSDDJq3Y3560UC+SiuIqYwqjgIAOw==");
+}
+
+.cell.flag.flagError {
+    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPIAAAAAAHt7e729vf8AAP///wAAAAAAAAAAACwAAAAAEAAQAAADRBi63CowyhkmBFbUMSSOnAaFQFkKoTgOZpmqAsARLhtVl8xyJ1S1OlYLZuIIP0SdEolbFTs30LEWRUFjUp/VIwk1M5MEADs=");
+}
+
+.cell, .cell.clicked, .cell.bomb, .cell.flag, .cell.clicked.count-1, .cell.clicked.count-2, .cell.clicked.count-3, .cell.clicked.count-4,
+.cell.clicked.count-5, .cell.clicked.count-6, .cell.clicked.count-7, .cell.clicked.count-8, .cell.bomb.clicked, .cell.flag.flagError {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -123,20 +102,6 @@ button {
 
 button:hover {
     background-color: darkred;
-}
-
-.cell.bomb.clicked {
-    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPEAAAAAAHt7e/8AAP///ywAAAAAEAAQAAACNIyPacLtHx4DUkRJ5RUUeM81G/d9zuYNQ5lZTbqWIsnW7lSDDJq3Y3560UC+SiuIqYwqjgIAOw==");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.cell.flag.flagError {
-    background-image: url("data:image/gif;base64,R0lGODdhEAAQAPIAAAAAAHt7e729vf8AAP///wAAAAAAAAAAACwAAAAAEAAQAAADRBi63CowyhkmBFbUMSSOnAaFQFkKoTgOZpmqAsARLhtVl8xyJ1S1OlYLZuIIP0SdEolbFTs30LEWRUFjUp/VIwk1M5MEADs=");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 #numeroMine, span, p, select, #restart, br {
