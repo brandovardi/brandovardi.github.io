@@ -152,21 +152,21 @@ class Campo {
                 this.partenzaSicura(c1);
                 bombaPrimoClick = true;
                 bombeTolte++;
-            }
-            // sistemo anche le celle attorno a quella cliccata
-            for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
-                for (let k = -1; k <= 1; k++) { // il secondo ciclo controlla le celle della riga
-                    // vado a prendere la cella adiacente alla riga "cell.row + j" e colonna "cell.col + k"
-                    let row = c1.row + j;
-                    let col = c1.col + k;
-                    // controllo che la riga e colonna non siano minori di zero e che non superino le dimensioni massime del campo
-                    if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
-                    // mi salvo la cella adiacente
-                    let adjacent = this.getCella(row, col);
-                    
-                    if (adjacent.count == 0 && adjacent.bomb) {
-                        this.partenzaSicura(adjacent);
-                        bombeTolte++;
+                // sistemo anche le celle attorno a quella cliccata
+                for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
+                    for (let k = -1; k <= 1; k++) { // il secondo ciclo controlla le celle della riga
+                        // vado a prendere la cella adiacente alla riga "cell.row + j" e colonna "cell.col + k"
+                        let row = c1.row + j;
+                        let col = c1.col + k;
+                        // controllo che la riga e colonna non siano minori di zero e che non superino le dimensioni massime del campo
+                        if (row < 0 || row >= this.height || col < 0 || col >= this.width) continue; // continuo il ciclo
+                        // mi salvo la cella adiacente
+                        let adjacent = this.getCella(row, col);
+                        
+                        if (adjacent.count == 0 && adjacent.bomb) {
+                            this.partenzaSicura(adjacent);
+                            bombeTolte++;
+                        }
                     }
                 }
             }
@@ -230,7 +230,7 @@ class Campo {
                         // prendo una cella casuale
                         c2 = this.getRandomCell();
                         // continuo a cercare una cella che non sia quella appena cliccata e che non abbia già una bomba
-                    } while (c2.clicked || (c2.bomb || ((c2.row == cell.row) && (c2.col == cell.col))));
+                    } while (c2.bomb || c2.clicked || ((c2.row == cell.row) && (c2.col == cell.col)));
                     // ci piazzo la bomba
                     c2.bomb = true;
                     // e azzero il contatore
