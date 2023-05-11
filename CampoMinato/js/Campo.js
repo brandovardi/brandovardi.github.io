@@ -148,11 +148,6 @@ class Campo {
         let bombeTolte = 0;
         // controllo se è il primo click dell'utente e se ha selezionato l'opzione per la "Partenza sicura"
         if (this.fisrtRightClick && ($('#partS').css('background-color') == 'rgb(255, 160, 0)')) {
-            if (c1.count == 0 && c1.bomb) {
-                this.partenzaSicura(c1);
-                bombaPrimoClick = true;
-                bombeTolte++;
-            }
             // sistemo anche le celle attorno a quella cliccata
             for (let j = -1; j <= 1; j++) { // il primo ciclo controlla le righe
                 for (let k = -1; k <= 1; k++) { // il secondo ciclo controlla le celle della riga
@@ -171,7 +166,12 @@ class Campo {
                     }
                 }
             }
-            this.fisrtRightClick = false;
+        }
+        // se al primo click trova una cella la tolgo per permettergli almeno di iniziare il gioco
+        if (c1.count == 0 && c1.bomb && this.fisrtRightClick) {
+            this.partenzaSicura(c1);
+            bombaPrimoClick = true;
+            bombeTolte++;
         }
         // se la cella è già stata cliccata (e controllo se è stata selezionata l'opzione)
         if (c1.clicked && ($('#vicS').css('background-color') == 'rgb(255, 160, 0)')) {
@@ -256,6 +256,7 @@ class Campo {
                 }
             }
         }
+        this.fisrtRightClick = false;
     }
 
     // metodo che restituisce il numero di bombe attorno ad una cella
