@@ -2,6 +2,11 @@ const classi = ['1', '2', '3', 'P'];
 
 $(document).ready(function () {
 
+    $('#editPersonal').click(function () {
+        $('#personalizza').css({display:'block'});
+        $('#modificaPersonalizzato').css({display:'none'});
+    });
+
     // funzione per cambiare lo sfondo al testo in base se la checkbox è attiva o meno 
     function change (td) {
         if (td.css('background-color') === 'rgb(255, 160, 0)') {
@@ -89,6 +94,8 @@ $(document).ready(function () {
         campo.generaCampo();
         // nascondo il div utile per sapere se si ha vinto o perso alla fine del gioco
         $('#end').hide();
+        // nascondo il campo per modificare quello personalizzato
+        $('#modificaPersonalizzato').css({display:'none'});
     });
 
     // funzione per impostare dei valori predefiniti quando si vuole personalizzare il campo
@@ -124,6 +131,7 @@ $(document).ready(function () {
         // poi pulisco e rigenero il campo
         campo.clear();
         campo.generaCampo();
+        $('#modificaPersonalizzato').css({display:'block'});
     });
 
     // se preme il pulsante annulla
@@ -148,6 +156,8 @@ $(document).ready(function () {
         else if (x.hasClass('P')) {
             $('#select').val('P');
             changeClass([false, false, false, true]);
+            // nascondo il campo per modificare quello personalizzato
+            $('#modificaPersonalizzato').css({display:'block'});
         }
     });
 
