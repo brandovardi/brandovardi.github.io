@@ -1,14 +1,20 @@
 const classi = ['1', '2', '3', 'P'];
+let salvaDati;
 
 $(document).ready(function () {
+    
+    $('html').contextmenu(function (event) {
+        event.preventDefault();
+        return;
+    });
 
     $('#editPersonal').click(function () {
-        $('#personalizza').css({display:'block'});
-        $('#modificaPersonalizzato').css({display:'none'});
+        $('#personalizza').css({ display: 'block' });
+        $('#modificaPersonalizzato').css({ display: 'none' });
     });
 
     // funzione per cambiare lo sfondo al testo in base se la checkbox è attiva o meno 
-    function change (td) {
+    function change(td) {
         if (td.css('background-color') === 'rgb(255, 160, 0)') {
             td.css('background-color', '');
         }
@@ -37,7 +43,7 @@ $(document).ready(function () {
         campo.clear();
         campo.generaCampo();
     }
-    
+
     // metodo per cambiare classe al campo in base alla difficoltà scelta
     function changeClass($val) {
         // se i valori passati sono maggiori delle classe presenti nel gioco allora non faccio nulla
@@ -57,22 +63,22 @@ $(document).ready(function () {
         // controllo i vari casi possibili e creo il campo in base alla scelta
         if (difficulty == "1") {
             campo = new Campo(8, 8, 10);
-            $('#personalizza').css({display:'none'});
+            $('#personalizza').css({ display: 'none' });
             changeClass([true, false, false, false]);
         }
         else if (difficulty == "2") {
             campo = new Campo(16, 16, 40);
-            $('#personalizza').css({display:'none'});
+            $('#personalizza').css({ display: 'none' });
             changeClass([false, true, false, false]);
         }
         else if (difficulty == "3") {
             campo = new Campo(16, 31, 99);
-            $('#personalizza').css({display:'none'});
+            $('#personalizza').css({ display: 'none' });
             changeClass([false, false, true, false]);
         }
         else if (difficulty == "P") {
             // se l'utente vuole personalizzare il campo allora rendo visibile il div per personalizzare
-            $('#personalizza').css({display:'block'});
+            $('#personalizza').css({ display: 'block' });
             // prendo l'elemento campo_minato
             let boardClass = $('#campo_minato');
             // imposto già dei dati predefiniti nei campi personalizzabili in base alla difficoltà scelta...
@@ -95,7 +101,7 @@ $(document).ready(function () {
         // nascondo il div utile per sapere se si ha vinto o perso alla fine del gioco
         $('#end').hide();
         // nascondo il campo per modificare quello personalizzato
-        $('#modificaPersonalizzato').css({display:'none'});
+        $('#modificaPersonalizzato').css({ display: 'none' });
     });
 
     // funzione per impostare dei valori predefiniti quando si vuole personalizzare il campo
@@ -117,27 +123,27 @@ $(document).ready(function () {
         // controllo che siano stati inseriti correttamente
         if ((alt < 8 || alt > 24) || (larg < 8 || larg > 32) || (mine < 1 || mine > ((alt * larg) / 3))) {
             alert("Le dimensioni del tuo Campo non sono valide:"
-                    + "\n->Altezza: da 8 a 24" 
-                    + "\n->Larghezza: da 8 a 32"
-                    + "\n->Bombe: da 1 a 1/3 delle caselle");
+                + "\n->Altezza: da 8 a 24"
+                + "\n->Larghezza: da 8 a 32"
+                + "\n->Bombe: da 1 a 1/3 delle caselle");
             return;
         }
         // creo il campo con gli attributi inseriti dall'utente
         let campo = new Campo(alt, larg, mine);
         // nascondo il campo div per personalizzare
-        $('#personalizza').css({display:'none'});
+        $('#personalizza').css({ display: 'none' });
         // modifico la classe del campo
         changeClass([false, false, false, true]);
         // poi pulisco e rigenero il campo
         campo.clear();
         campo.generaCampo();
-        $('#modificaPersonalizzato').css({display:'block'});
+        $('#modificaPersonalizzato').css({ display: 'block' });
     });
 
     // se preme il pulsante annulla
     $('#CancelButton').click(function () {
         // allora nascondo il div per personalizzare
-        $('#personalizza').css({display:'none'});
+        $('#personalizza').css({ display: 'none' });
         // mi salvo il campo minato perché mi servirà controllare la classe
         let x = $('div#campo_minato');
         // in base alla classe modifico il valore nella select
@@ -157,7 +163,7 @@ $(document).ready(function () {
             $('#select').val('P');
             changeClass([false, false, false, true]);
             // nascondo il campo per modificare quello personalizzato
-            $('#modificaPersonalizzato').css({display:'block'});
+            $('#modificaPersonalizzato').css({ display: 'block' });
         }
     });
 
@@ -196,9 +202,9 @@ $(document).ready(function () {
                 // e controllo che siano stati inseriti correttamente
                 if ((alt < 8 || alt > 24) || (larg < 8 || larg > 32) || (mine < 1 || mine > ((alt * larg) / 3))) {
                     alert("Le dimensioni del tuo Campo non sono valide:"
-                            + "\n->Altezza: da 8 a 24" 
-                            + "\n->Larghezza: da 8 a 32"
-                            + "\n->Bombe: da 1 a 1/3 delle caselle");
+                        + "\n->Altezza: da 8 a 24"
+                        + "\n->Larghezza: da 8 a 32"
+                        + "\n->Bombe: da 1 a 1/3 delle caselle");
                     return;
                 }
                 else {
@@ -210,7 +216,7 @@ $(document).ready(function () {
             }
         }
         // nascondo il div per personalizzare
-        $('#personalizza').css({display:'none'});
+        $('#personalizza').css({ display: 'none' });
         // poi pulisco e rigenero il campo
         campo.clear();
         campo.generaCampo();
