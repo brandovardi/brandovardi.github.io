@@ -1,11 +1,17 @@
 const classi = ['1', '2', '3', 'P'];
-let salvaDati;
+let campo;
+
+let select = classi[0], classe = classi[0], pS = false, vS = false;
 
 $(document).ready(function () {
-    
-    $('html').contextmenu(function (event) {
-        event.preventDefault();
-        return;
+
+    $(window).on('beforeunload', function () {
+        campo.select = select;
+        campo.classeThis = classe;
+        campo.pS = pS;
+        campo.vS = vS;
+        // Salva i dati qui
+        localStorage.setItem('dati', JSON.stringify(campo));
     });
 
     $('#editPersonal').click(function () {
@@ -27,19 +33,43 @@ $(document).ready(function () {
     // partenza sicura
     $('#partS').click(function () {
         change($(this));
+        pS = !pS;
     });
 
     //////////////////////////////////////////
     // vicinato sicuro
     $('#vicS').click(function () {
         change($(this));
+        vS = !vS;
     });
     //////////////////////////////////////////
 
     // if per quando si carica la pagina per la prima volta
-    if ($('#select').val() == "1") {
+
+    let campoSalvato = localStorage.getItem('dati');
+
+    if (campoSalvato !== null) {
+        let tmpCampo = JSON.parse(campoSalvato);
+        $('#select').val(tmpCampo.select);
+        $('#campo_minato').toggleClass(tmpCampo.classeThis, true);
+        campo = new Campo(tmpCampo.height, tmpCampo.width, tmpCampo.bombe);
+        campo.clear();
+        campo.generaCampo();
+
+        if ((campo.vS = tmpCampo.vS)) change($('#vicS'));
+        if ((campo.pS = tmpCampo.pS)) change($('#partS'));
+        if ((campo.select = tmpCampo.select) == 'P') {
+            $('#modificaPersonalizzato').css({ display: 'block' });
+            impostaValoriDefaultPersonal(campo.height, campo.width, campo.bombe);
+        }
+        campo.classeThis = tmpCampo.classeThis;
+
+        vS = campo.vS; pS = campo.pS; classe = campo.classeThis; select = campo.select;
+    }
+    else {
+        // costruzione di default
         $('#campo_minato').toggleClass($('#select').val(), true);
-        let campo = new Campo(8, 8, 10);
+        campo = new Campo(8, 8, 10);
         campo.clear();
         campo.generaCampo();
     }
@@ -51,6 +81,7 @@ $(document).ready(function () {
         // ciclo per cambiare la classe del campo
         for (let i = 0; i < classi.length; i++) {
             $('#campo_minato').toggleClass(classi[i], $val[i]);
+            if ($val[i]) classe = classi[i];
         }
     }
 
@@ -58,8 +89,6 @@ $(document).ready(function () {
     $('#select').change(function () {
         // mi salvo il valore appena selezionato
         let difficulty = $(this).val();
-        // inizializzo un campo undefined
-        let campo;
         // controllo i vari casi possibili e creo il campo in base alla scelta
         if (difficulty == "1") {
             campo = new Campo(8, 8, 10);
@@ -98,6 +127,7 @@ $(document).ready(function () {
         campo.clear();
         // e lo genero
         campo.generaCampo();
+        select = difficulty;
         // nascondo il div utile per sapere se si ha vinto o perso alla fine del gioco
         $('#end').hide();
         // nascondo il campo per modificare quello personalizzato
@@ -129,7 +159,7 @@ $(document).ready(function () {
             return;
         }
         // creo il campo con gli attributi inseriti dall'utente
-        let campo = new Campo(alt, larg, mine);
+        campo = new Campo(alt, larg, mine);
         // nascondo il campo div per personalizzare
         $('#personalizza').css({ display: 'none' });
         // modifico la classe del campo
@@ -137,6 +167,7 @@ $(document).ready(function () {
         // poi pulisco e rigenero il campo
         campo.clear();
         campo.generaCampo();
+        select = $('#select').val();
         $('#modificaPersonalizzato').css({ display: 'block' });
     });
 
@@ -173,8 +204,6 @@ $(document).ready(function () {
         let x = $('div#campo_minato');
         // nascondo la scritta visibile alla fine del gioco
         $('#end').hide();
-        // inizializzo un campo undefined
-        let campo;
         // e in base alla scelta "resetto" il campo
         if (x.hasClass('1')) {
             campo = new Campo(8, 8, 10);
@@ -220,5 +249,12 @@ $(document).ready(function () {
         // poi pulisco e rigenero il campo
         campo.clear();
         campo.generaCampo();
+        select = $('#select').val();
     });
+
+    function cambiaCampoAttuale(row, col, bomb) {
+        campo.height = row;
+        campo.width = col;
+        campo.bombe = bomb;
+    }
 });
