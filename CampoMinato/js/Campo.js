@@ -12,6 +12,11 @@ class Campo {
         this.flags = 0; // numero delle bandierine piazzate dall'utente
         this.fisrtRightClick = true; // variabile per controllare quando l'utente clicca per la prima volta sul campo
         this.classi = ['count-1', 'count-2', 'count-3', 'count-4', 'count-5', 'count-6', 'count-7', 'count-8'];
+        // attributi necessari solo per il localstorage
+        this.classeThis = "";
+        this.select = "";
+        this.pS = false;
+        this.vS = false;
     }
 
     // metodo per pulire lo schermo togliendo il campo
