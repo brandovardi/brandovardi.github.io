@@ -109,10 +109,15 @@ button:hover {
 }
 
 #partS:hover, #vicS:hover {
-    background-color: rgb(255, 201, 102);
+    background-color: rgb(204, 146, 37);
 }
 
 #partS, #vicS {
+    background-color: rgb(205, 200, 199);
     border: 2px solid black;
     line-height: 10%;
+}
+
+body {
+    background-color: lightblue;
 }
