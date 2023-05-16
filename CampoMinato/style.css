@@ -104,7 +104,7 @@ button:hover {
     background-color: darkred;
 }
 
-#numeroMine, span, p, select, #restart, br, #personalizza, #end, body, html {
+html {
     user-select: none;
 }
 
