@@ -5,6 +5,11 @@ let select = classi[0], classe = classi[0], pS = false, vS = false;
 
 $(document).ready(function () {
 
+    $('html').contextmenu(function (event) {
+        event.preventDefault();
+        return;
+    });
+
     $(window).on('beforeunload', function () {
         campo.select = select;
         campo.classeThis = classe;
