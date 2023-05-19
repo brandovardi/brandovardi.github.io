@@ -5,6 +5,15 @@ let select = classi[0], classe = classi[0], pS = false, vS = false;
 
 $(document).ready(function () {
 
+    $(this).keypress(function (event) {
+        if (event.which === 13) {
+            if ($('#personalizza').css('display') == 'block') {
+                event.preventDefault();
+                OkButton();
+            }
+        }
+    });
+
     $('html').contextmenu(function (event) {
         event.preventDefault();
         return;
@@ -150,16 +159,20 @@ $(document).ready(function () {
 
     // quando viene premuto il pulsante ok del div per personalizzare
     $('#OKButton').click(function () {
+        OkButton();
+    });
+
+    function OkButton() {
         // mi salvo i dati inseriti
         let alt = $('#Maxh').val();
         let larg = $('#Maxw').val();
         let mine = $('#numBomb').val();
 
         // controllo che siano stati inseriti correttamente
-        if ((alt < 8) || (larg < 8) || (mine < 1 || mine > ((alt * larg) / 3))) {
+        if ((alt < 8 || alt > 52) || (larg < 8 || larg > 52) || (mine < 1 || mine > ((alt * larg) / 3))) {
             alert("Le dimensioni del tuo Campo non sono valide:"
-                + "\nAltezza = minimo 8"
-                + "\nLarghezza = minimo 8"
+                + "\nAltezza = minimo 8, massimo 52"
+                + "\nLarghezza = minimo 8, massimo 52"
                 + "\nBombe = da 1 a 1/3 delle caselle");
             return;
         }
@@ -174,7 +187,7 @@ $(document).ready(function () {
         campo.generaCampo();
         select = $('#select').val();
         $('#modificaPersonalizzato').css({ display: 'block' });
-    });
+    }
 
     // se preme il pulsante annulla
     $('#CancelButton').click(function () {
@@ -234,10 +247,10 @@ $(document).ready(function () {
             // controllo che i valori esistano
             if (alt != '' && larg != '' && mine != '') {
                 // controllo che siano stati inseriti correttamente
-                if ((alt < 8) || (larg < 8) || (mine < 1 || mine > ((alt * larg) / 3))) {
+                if ((alt < 8 || alt > 52) || (larg < 8 || larg > 52) || (mine < 1 || mine > ((alt * larg) / 3))) {
                     alert("Le dimensioni del tuo Campo non sono valide:"
-                        + "\nAltezza = minimo 8"
-                        + "\nLarghezza = minimo 8"
+                        + "\nAltezza = minimo 8, massimo 52"
+                        + "\nLarghezza = minimo 8, massimo 52"
                         + "\nBombe = da 1 a 1/3 delle caselle");
                     return;
                 }
