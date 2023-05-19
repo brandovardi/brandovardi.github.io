@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     $(window).on('beforeunload', function () {
         // Salva i dati qui
-        localStorage.setItem('dati', JSON.stringify(l1));
+        localStorage.setItem('todolist', JSON.stringify(l1));
     });
 
     $('input[type="checkbox"]').change(function () {
@@ -16,7 +16,7 @@ $(document).ready(function () {
         }
     });
 
-    let listaSalvata = localStorage.getItem('dati');
+    let listaSalvata = localStorage.getItem('todolist');
 
     if (listaSalvata !== null) {
         let l1Tmp = JSON.parse(listaSalvata);
