@@ -156,11 +156,11 @@ $(document).ready(function () {
         let mine = $('#numBomb').val();
 
         // controllo che siano stati inseriti correttamente
-        if ((alt < 8 || alt > 24) || (larg < 8 || larg > 32) || (mine < 1 || mine > ((alt * larg) / 3))) {
+        if ((alt < 8) || (larg < 8) || (mine < 1 || mine > ((alt * larg) / 3))) {
             alert("Le dimensioni del tuo Campo non sono valide:"
-                + "\n->Altezza: da 8 a 24"
-                + "\n->Larghezza: da 8 a 32"
-                + "\n->Bombe: da 1 a 1/3 delle caselle");
+                + "\nAltezza = minimo 8"
+                + "\nLarghezza = minimo 8"
+                + "\nBombe = da 1 a 1/3 delle caselle");
             return;
         }
         // creo il campo con gli attributi inseriti dall'utente
@@ -233,12 +233,12 @@ $(document).ready(function () {
             let mine = $('#numBomb').val();
             // controllo che i valori esistano
             if (alt != '' && larg != '' && mine != '') {
-                // e controllo che siano stati inseriti correttamente
-                if ((alt < 8 || alt > 24) || (larg < 8 || larg > 32) || (mine < 1 || mine > ((alt * larg) / 3))) {
+                // controllo che siano stati inseriti correttamente
+                if ((alt < 8) || (larg < 8) || (mine < 1 || mine > ((alt * larg) / 3))) {
                     alert("Le dimensioni del tuo Campo non sono valide:"
-                        + "\n->Altezza: da 8 a 24"
-                        + "\n->Larghezza: da 8 a 32"
-                        + "\n->Bombe: da 1 a 1/3 delle caselle");
+                        + "\nAltezza = minimo 8"
+                        + "\nLarghezza = minimo 8"
+                        + "\nBombe = da 1 a 1/3 delle caselle");
                     return;
                 }
                 else {
@@ -256,10 +256,4 @@ $(document).ready(function () {
         campo.generaCampo();
         select = $('#select').val();
     });
-
-    function cambiaCampoAttuale(row, col, bomb) {
-        campo.height = row;
-        campo.width = col;
-        campo.bombe = bomb;
-    }
 });
