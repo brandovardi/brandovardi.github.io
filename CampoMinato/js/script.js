@@ -16,7 +16,7 @@ $(document).ready(function () {
         campo.pS = pS;
         campo.vS = vS;
         // Salva i dati qui
-        localStorage.setItem('dati', JSON.stringify(campo));
+        localStorage.setItem('campoMinato', JSON.stringify(campo));
     });
 
     $('#editPersonal').click(function () {
@@ -51,7 +51,7 @@ $(document).ready(function () {
 
     // if per quando si carica la pagina per la prima volta
 
-    let campoSalvato = localStorage.getItem('dati');
+    let campoSalvato = localStorage.getItem('campoMinato');
 
     if (campoSalvato !== null) {
         let tmpCampo = JSON.parse(campoSalvato);
