@@ -1,0 +1,67 @@
+body {
+    background-color: lightgray;
+}
+
+.title {
+    font-size: large;
+    font-weight: bold;
+}
+
+#line {
+    margin: auto;
+    border: 2px solid darkgreen;
+    width: 50%;
+}
+
+#body {
+    margin: auto;
+    width: 90%;
+}
+
+#div-add-note {
+    text-align: center;
+    margin: auto;
+    justify-content: space-evenly;
+    background: lightblue;
+    border: 1px solid lightblue;
+    width: 10%;
+    height: 100px;
+    border-radius: 5%;
+}
+
+#div-add-note:hover {
+    cursor: pointer;
+}
+
+#write-note {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    margin: auto;
+    border: 1px solid #ccc;
+}
+
+#delete-note {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: darkgray;
+    margin: auto;
+    border: 2px solid black;
+}
+
+#note-table, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td {
+    cursor: pointer;
+}
+

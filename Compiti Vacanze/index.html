@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+        <div class="title">
+            <h1 align="center">Le Tue Note</h1>
+            <div id="addNote"></div>
+        </div><br>
+
+        <div id="line" align="center"></div><br>
+
+        <div id="body">
+            <div id="write-note">
+                Titolo:<br><input type="text" id="title"><br>
+                Testo:<br><textarea id="text" rows="4" cols="50"></textarea>
+                <button id="saveBtn">Salva</button>
+            </div>
+            <div id="delete-note">
+                <button id="deleteBtn">Elimina nota</button>
+            </div>
+
+            <table id="note-table" align="center">
+                
+            </table>
+
+        </div>
+        <br>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="./script/Nota.js"></script>
+        <script src="./script/Lista.js"></script>
+        <script src="./script/script.js"></script>
+    </body>
+</html>
