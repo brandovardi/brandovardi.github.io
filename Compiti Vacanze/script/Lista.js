@@ -27,7 +27,7 @@ class Lista {
     modifyNota(creationData, newText) {
         for (let i = 0; i < this.note.length; i++) {
             if (creationData === this.note[i].creationData) {
-                this.note[i].text = newText
+                this.note[i].text = newText;
             }
         }
     }
@@ -54,5 +54,14 @@ class Lista {
     getNota(index) {
         return this.note[index];
     }
-
+    
+    titleAlreadyExist(titolo) {
+        for (let i = 0; i < this.note.length; i++) {
+            if (titolo === this.note[i].title)
+            {
+                return true
+            }
+        }
+        return false
+    }
 }
