@@ -108,6 +108,16 @@ $(document).ready(function () {
 
         let titolo = $("#title").val(); // memorizzo il titolo (se presente)
         let testo = $("#text").val(); // memorizzo il testo della nota (se presente)
+        if (lista.titleAlreadyExist(titolo)) {
+            alert("Impossibile creare una nota con un titolo già esistente.")
+            // allora nascondo il tutto
+            note.css("display", "none");
+            $("#div-add-note").css("cursor", "pointer");
+            $("#div-add-note").attr('title', "Aggiungi una nota");
+            $("#title").val("");
+            $("#text").val("");
+            return;
+        }
         let nota = lista.getNotaFromTitle(titolo); // infine vado a prelevare la nota dalla lista filtrando per il titolo ottenuto
         // se la nota esiste
         if (nota !== null) {
@@ -219,7 +229,7 @@ $(document).ready(function () {
             let newRow;
             let newCol = $("<td>" + lista.getNota(i).title + "</td>");
             if (i == 0 || (i % 4) == 0) {
-                newRow = $("<tr id=note-number-" + (cnt / 4) + ">")
+                newRow = $("<tr id=note-number-" + cnt + ">")
                 newRow.append(newCol)
                 cnt++;
                 NoteTable.append(newRow);
