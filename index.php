@@ -1,3 +1,9 @@
+<?php
+
+echo "Benvenuto nel mio sito web!";
+
+?>
+
 <html>
   
 <head>
