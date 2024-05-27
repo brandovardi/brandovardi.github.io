@@ -1,6 +1,8 @@
 <?php
 
-echo "Benvenuto nel mio sito web!";
+echo "Benvenuto nel mio sito web!<br>";
+$param = $_GET["param"];
+echo $param;
 
 ?>
 
