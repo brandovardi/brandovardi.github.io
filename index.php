@@ -1,7 +1,6 @@
 <?php
 
-$param = $_GET['param'];
-echo "param: $param";
+echo "Benvenuto nel mio sito web!";
 
 ?>
 
