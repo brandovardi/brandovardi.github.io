@@ -1,29 +1,14 @@
 
 $(document).ready(function () {
     console.log("Script loaded!");
-    
+
     (function () {
-        console.log("Overriding fetch() function");
-
-        const originalFetch = window.fetch;
-        console.log("Original fetch function:", originalFetch);
-
-        window.fetch = async function (resource, options) {
-            console.log("Intercepted fetch() call");
-
-            if (options && options.method === "GET") {
-                console.log("Intercepted fetch POST request to:", resource);
-                console.log("Request body:", options.body);
-
-                // take the url parameter
-                let url = new URL(resource);
-                // run the python script passing the url parameter
-                let git_link = "http://brandovardi.github.io/my-api/py/x.py ";
-                let response = await fetch(git_link + url.searchParams.get("url"));
-                let data = await response.json();
-                console.log(data);
-            }
-            return originalFetch.apply(this, arguments);
+        console.log("Intercepting POST requests...");
+        const originalSend = XMLHttpRequest.prototype.send;
+        
+        XMLHttpRequest.prototype.send = function (body) {
+            console.log("Intercepted POST request body:", body);
+            return originalSend.apply(this, arguments);
         };
     })();
 });
