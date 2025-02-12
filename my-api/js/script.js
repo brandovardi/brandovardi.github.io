@@ -1,9 +1,9 @@
 (function() {
     const originalFetch = window.fetch;
     window.fetch = async function(resource, options) {
-        if (options && options.method === "POST") {
-            // console.log("Intercepted fetch POST request to:", resource);
-            // console.log("Request body:", options.body);
+        if (options && options.method === "GET") {
+            console.log("Intercepted fetch POST request to:", resource);
+            console.log("Request body:", options.body);
 
             // take the url parameter
             let url = new URL(resource);
